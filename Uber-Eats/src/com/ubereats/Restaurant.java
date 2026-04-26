@@ -3,8 +3,8 @@ package com.ubereats;
 public class Restaurant extends User {
     private Menu menu;
 
-    public Restaurant(String name, String location) {
-        super(name, location);
+    public Restaurant(String username) {
+        super(username);
         this.menu = new Menu();
     }
 
@@ -12,7 +12,7 @@ public class Restaurant extends User {
     
     @Override
     public String toString() {
-        return "Restaurant: " + getName() + ", Location: " + getLocation();
+        return "Restaurant: " + getUsername();
     }
 
 }

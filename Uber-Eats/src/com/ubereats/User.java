@@ -1,28 +1,20 @@
 package com.ubereats;
 
 public abstract class User {
-    private String name;
-    private String location;
+    // para esta demo podemos solo usar username
+    // podriamos agregar email, nombre, contraseña, telefono, por ejemplo
+    private String username;
 
-    public User(String name, String location) {
-        this.name = name;
-        this.location = location;
+    public User(String username) {
+        this.username = username;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
