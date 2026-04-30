@@ -41,6 +41,10 @@ public class Order implements OrderObservable{
 		// TODO Auto-generated method stub
 	}
 	
+	public void updateOrderState() {
+		orderState.manageState(this);
+	}
+	
 	public void payOrder(Double amount) {
 		paymentMethod.pay(amount);
 	}
