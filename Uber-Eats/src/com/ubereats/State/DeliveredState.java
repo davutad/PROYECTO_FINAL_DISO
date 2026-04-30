@@ -6,7 +6,7 @@ public class DeliveredState implements OrderState{
 	public void manageState(Order order) {
 		// TODO Auto-generated method stub
 		System.out.println("El repartidor ha entregado su pedido");
-		order.notifyOrderObservers();
+		order.notifyObservers();
 	}
 
 }
