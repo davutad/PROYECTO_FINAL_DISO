@@ -42,7 +42,7 @@ public class Order implements OrderObservable{
 	public void notifyObservers() {
 		// TODO Auto-generated method stub
 		for(OrderObserver orderObserver: this.orderObservers) {
-			orderObserver.update();
+			orderObserver.update(this);
 		}
 	}
 	
