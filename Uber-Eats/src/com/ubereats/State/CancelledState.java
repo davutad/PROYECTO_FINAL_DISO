@@ -1,4 +1,4 @@
-package com.ubereats.State;
+package com.ubereats.state;
 
 public class CancelledState implements OrderState{
 

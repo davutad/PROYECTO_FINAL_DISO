@@ -1,9 +1,8 @@
-package com.ubereats.State;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ubereats.Observer.*;
-import com.ubereats.Strategy.*;
+import com.ubereats.observer.*;
+import com.ubereats.strategy.*;
 
 public class Order implements OrderObservable{
 	private OrderState orderState;
@@ -15,7 +14,7 @@ public class Order implements OrderObservable{
 		this.orderObservers = new ArrayList<>();
 	}
 	
-	//Es el update del uml???
+	// TODO Es el update del uml???
 	public void setOrderState(OrderState orderState) {
 		this.orderState = orderState;
 	}

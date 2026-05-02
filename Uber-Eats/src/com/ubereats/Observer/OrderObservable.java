@@ -1,4 +1,4 @@
-package com.ubereats.Observer;
+package com.ubereats.observer;
 
 public interface OrderObservable {
 	public void addObserver(OrderObserver orderObserver);
