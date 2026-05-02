@@ -1,4 +1,6 @@
-package com.ubereats;
+package com.ubereats.factory;
+
+import com.ubereats.User;
 
 public abstract class UserFactory {
 
