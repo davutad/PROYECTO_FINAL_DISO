@@ -1,6 +1,7 @@
-package com.ubereats;
+package com.ubereats.factory;
 
-import com.ubereats.factory.UserFactory;
+import com.ubereats.Restaurant;
+import com.ubereats.User;
 
 public class RestaurantFactory extends UserFactory {
 
