@@ -26,19 +26,22 @@ public class Order implements OrderObservable{
 
 	@Override
 	public void addObserver(OrderObserver orderObserver) {
-		// TODO Auto-generated method stub
+		orderObservers.add(orderObserver);
 		
 	}
 
 	@Override
 	public void deleteObserver(OrderObserver orderObserver) {
-		// TODO Auto-generated method stub
+		orderObservers.remove(orderObserver);
 		
 	}
 	
 	@Override
 	public void notifyObservers() {
 		// TODO Auto-generated method stub
+		for(OrderObserver orderObserver: this.orderObservers) {
+			orderObserver.update();
+		}
 	}
 	
 	public void updateOrderState() {
