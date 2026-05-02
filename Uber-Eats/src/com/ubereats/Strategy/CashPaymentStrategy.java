@@ -1,4 +1,4 @@
-package com.ubereats.strategy;
+package com.ubereats.Strategy;
 
 public class CashPaymentStrategy implements PaymentMethodStrategy{
 
