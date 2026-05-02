@@ -1,4 +1,4 @@
-package com.ubereats.State;
+package com.ubereats.state;
 
 import com.ubereats.Order;
 

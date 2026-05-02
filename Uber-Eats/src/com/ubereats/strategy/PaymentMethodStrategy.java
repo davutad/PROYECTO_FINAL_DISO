@@ -1,4 +1,4 @@
-package com.ubereats.Strategy;
+package com.ubereats.strategy;
 
 public interface PaymentMethodStrategy {
 	public void pay(Double amount);

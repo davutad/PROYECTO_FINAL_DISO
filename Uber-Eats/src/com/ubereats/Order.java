@@ -3,9 +3,9 @@ package com.ubereats;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ubereats.State.OrderState;
-import com.ubereats.Observer.*;
-import com.ubereats.Strategy.*;
+import com.ubereats.strategy.*;
+import com.ubereats.observer.*;
+import com.ubereats.state.OrderState;
 
 public class Order implements OrderObservable{
 	private OrderState orderState;

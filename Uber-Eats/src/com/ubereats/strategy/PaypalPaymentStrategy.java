@@ -1,4 +1,4 @@
-package com.ubereats.Strategy;
+package com.ubereats.strategy;
 
 public class PaypalPaymentStrategy implements PaymentMethodStrategy{
 	
