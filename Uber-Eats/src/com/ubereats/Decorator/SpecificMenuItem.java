@@ -1,5 +1,5 @@
 
-package com.ubereats
+package com.ubereats;
 
 public class SpecificMenuItem implements MenuItemComponent{
     private MenuItem item;

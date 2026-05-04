@@ -1,4 +1,4 @@
-package com.ubereats
+package com.ubereats;
 
 public abstract class MenuItemDecorator implements MenuItemComponent{
     protected MenuItemComponent menuItemComponent;
