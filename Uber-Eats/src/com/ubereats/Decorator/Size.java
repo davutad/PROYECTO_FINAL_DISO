@@ -6,15 +6,15 @@ public enum Size{
     LARGE(1.3, "Large"),
     EXTRA_LARGE(1.6, "Extra large");
 
-    private final Double priceMultiplier;
+    private final double priceMultiplier;
     private final String label;
 
-    Size(Double priceMultiplier, String label){
+    Size(double priceMultiplier, String label){
         this.priceMultiplier = priceMultiplier;
         this.label = label;
     }
 
-    public Double getPriceMultiplier() {
+    public double getPriceMultiplier() {
         return this.priceMultiplier;
     }
     public String getLabel() {
