@@ -1,7 +1,6 @@
 
 package com.ubereats
 
-        jkdasf
 public class SpecificMenuItem implements MenuItemComponent{
     private MenuItem item;
 
