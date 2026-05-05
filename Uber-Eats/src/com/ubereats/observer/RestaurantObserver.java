@@ -15,8 +15,8 @@ public class RestaurantObserver implements OrderObserver{
 	//Metodo para decir al restaurante de que ha cambiado el estado del pedido
 	@Override
 	public void update(Order order) {
-		System.out.println("Restaurante: " + restaurant.getUsername() + "notificado. Nuevo estado: " 
-	+ order.getOrderState());
+		System.out.println("Restaurante: " + restaurant.getUsername() + "notificado. Pedido #" + order.getId() + 
+		" del cliente " + order.getClient().getName() + "Nuevo estado: " + order.getOrderState());
 		// TODO falta un order ID + cliente para identificar el pedido
 		// realmente el restaurante solo deberia recibir notificacion cuando se crea el pedido, luego solo actualiza
 	}

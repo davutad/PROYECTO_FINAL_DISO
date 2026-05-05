@@ -11,4 +11,9 @@ public class DeliveredState implements OrderState{
 		order.notifyObservers();
 	}
 
+	@Override
+	public String toString() {
+		return "Entregado";
+	}
+
 }

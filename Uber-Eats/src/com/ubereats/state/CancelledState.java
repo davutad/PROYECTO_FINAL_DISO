@@ -9,4 +9,9 @@ public class CancelledState implements OrderState{
 		System.out.println("El pedido ha sido cancelado.");
 	}
 
+	@Override
+	public String toString() {
+		return "Cancelado";
+	}
+
 }

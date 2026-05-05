@@ -5,17 +5,47 @@ import java.util.List;
 
 import com.ubereats.observer.*;
 import com.ubereats.state.OrderState;
+import com.ubereats.state.PendingState;
 import com.ubereats.strategy.*;
 
 public class Order implements OrderObservable{
+
+	private static int nextId = 1;
+	
+	private int id;
+	private Restaurant restaurant;
+	private DeliveryDriver deliveryDriver;
+	private Client client;
+
 	private OrderState orderState;
 	private PaymentMethodStrategy paymentMethod;
 	private List<OrderObserver> orderObservers;
 	
-	public Order(PaymentMethodStrategy paymentMethod) {
+	public Order(Restaurant restaurant, DeliveryDriver deliveryDriver, Client client ,PaymentMethodStrategy paymentMethod) {
+		this.id = nextId++;
+		this.restaurant = restaurant;
+		this.deliveryDriver = deliveryDriver;
+		this.client = client;
 		this.paymentMethod = paymentMethod;
+		this.orderState = new PendingState();
 		this.orderObservers = new ArrayList<>();
 	}
+
+	public int getId() {
+        return id;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public DeliveryDriver getDeliveryDriver() {
+        return deliveryDriver;
+    }
+
+    public Client getClient() {
+        return client;
+    }
 	
 	// TODO Es el update del uml???
 	public void setOrderState(OrderState orderState) {

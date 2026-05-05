@@ -13,4 +13,9 @@ public class PendingState implements OrderState{
 		
 	}
 
+	@Override
+	public String toString() {
+		return "Pendiente";
+	}
+
 }

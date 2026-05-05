@@ -13,4 +13,9 @@ public class PreparingState implements OrderState{
 		
 	}
 
+	@Override
+	public String toString() {
+		return "En preparación";
+	}
+
 }

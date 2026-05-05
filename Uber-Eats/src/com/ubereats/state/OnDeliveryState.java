@@ -13,4 +13,9 @@ public class OnDeliveryState implements OrderState{
 		
 	}
 
+	@Override
+	public String toString() {
+		return "En reparto";
+	}
+
 }
