@@ -18,7 +18,7 @@ public enum Size{
         return this.priceMultiplier;
     }
     public String getLabel() {
-        return this.label;
+        return this.name;
     }
 
 }
