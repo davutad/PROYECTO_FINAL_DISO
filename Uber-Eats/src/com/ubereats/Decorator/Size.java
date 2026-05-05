@@ -7,18 +7,18 @@ public enum Size{
     EXTRA_LARGE(1.6, "Extra large");
 
     private final double priceMultiplier;
-    private final String label;
+    private final String name;
 
     Size(double priceMultiplier, String label){
         this.priceMultiplier = priceMultiplier;
-        this.label = label;
+        this.label = name;
     }
 
     public double getPriceMultiplier() {
         return this.priceMultiplier;
     }
     public String getLabel() {
-        return this.label;
+        return this.name;
     }
 
 }
