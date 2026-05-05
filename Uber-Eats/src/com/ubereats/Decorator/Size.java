@@ -1,5 +1,10 @@
 package com.ubereats.Decorator;
 
+/*
+Enum que representa los tamaños disponibles para un producto.
+Cada tamaño tiene un multiplicador que afecta al precio final.
+*/
+
 public enum Size{
     SMALL(0.8, "Small"),
     MEDIUM(1.0, "Medium"),

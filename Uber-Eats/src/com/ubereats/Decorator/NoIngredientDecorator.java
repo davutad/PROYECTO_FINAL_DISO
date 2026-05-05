@@ -1,5 +1,10 @@
 package com.ubereats.Decorator;
 
+/*
+Decorador que elimina un ingrediente del producto.
+Puede reducir el precio aplicando un descuento asociado al ingrediente eliminado.
+*/
+
 public class NoIngredientDecorator extends MenuItemDecorator{
     private String ingredient;
     private Double discount;

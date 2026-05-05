@@ -1,5 +1,10 @@
 package com.ubereats.Decorator;
 
+/*
+Decorador que aplica un descuento porcentual al producto.
+El descuento se aplica sobre el precio actual, incluyendo otros decoradores previos.
+*/
+
 public class DiscountDecorator extends MenuItemDecorator{
     private Double percentage;
 

@@ -46,15 +46,16 @@ public class Order implements OrderObservable{
     public Client getClient() {
         return client;
     }
-	
+
+	public OrderState getOrderState() {
+		return this.orderState;
+	}
+
 	// TODO Es el update del uml???
 	public void setOrderState(OrderState orderState) {
 		this.orderState = orderState;
 	}
 	
-	public OrderState getOrderState() {
-		return this.orderState;
-	}
 
 	@Override
 	public void addObserver(OrderObserver orderObserver) {

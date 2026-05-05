@@ -1,5 +1,10 @@
 package com.ubereats.Decorator;
 
+/*
+Decorador que añade un ingrediente o extra al producto.
+Modifica el nombre, la descripción y aumenta el precio final.
+*/
+
 public class ExtraDecorator extends MenuItemDecorator{
     private String extraName;
     private Double extraPrice;

@@ -1,8 +1,14 @@
-
 package com.ubereats.Decorator;
+
+/*
+Adaptador entre MenuItem y MenuItemComponent
+Permite que un producto del menú pueda ser decorado más adelante
+*/
 
 public class SpecificMenuItem implements MenuItemComponent{
     private MenuItem item;
+
+    // Recibe un producto básico del menú y lo adapta al sistema de decoradores.
 
     public SpecificMenuItem(MenuItem item){
         this.item =item;
@@ -22,6 +28,8 @@ public class SpecificMenuItem implements MenuItemComponent{
     public String getDescription(){
         return item.getDescription();
     }
+
+    // Información completa del producto
 
     @Override
     public void print(){

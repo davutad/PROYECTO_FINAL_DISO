@@ -1,5 +1,8 @@
 package com.ubereats;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public abstract class User {
     // para esta demo podemos solo usar username
     // podriamos agregar email, nombre, contraseña, telefono, por ejemplo
