@@ -8,7 +8,6 @@ public class PendingState implements OrderState{
 	public void manageState(Order order) {
 		// TODO Auto-generated method stu
 		System.out.println("Pedido pendiente de confirmacion");
-		order.notifyObservers();//notificar observadors
 		order.setOrderState(new PreparingState());
 		
 	}
