@@ -1,15 +1,17 @@
 package com.ubereats;
 
-public class Client {
-    
-    private String name;
+public class Client extends User {
 
-    public Client(String name) {
-        this.name = name;
+    public Client(String username) {
+        super(username);
     }
 
     public String getName() {
-        return name;
+        return getUsername();
     }
 
+    @Override
+    public String toString() {
+        return "Client: " + getUsername();
+    }
 }
