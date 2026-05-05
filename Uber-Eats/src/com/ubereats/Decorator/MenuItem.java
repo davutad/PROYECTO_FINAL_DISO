@@ -1,4 +1,4 @@
-package com.ubereats;
+package com.ubereats.Decorator;
 
 public interface MenuItem {
     String getName();

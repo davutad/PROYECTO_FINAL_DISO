@@ -1,4 +1,4 @@
-package com.ubereats;
+package com.ubereats.Decorator;
 
 public class BasicMenuItem implements MenuItem{
     private String name;

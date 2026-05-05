@@ -1,4 +1,4 @@
-package com.ubereats;
+package com.ubereats.Decorator;
 
 public class NoIngredientDecorator extends MenuItemDecorator{
     private String ingredient;

@@ -1,4 +1,4 @@
-package com.ubereats;
+package com.ubereats.Decorator;
 
 public enum Size{
     SMALL(0.8, "Small"),

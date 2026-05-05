@@ -1,4 +1,4 @@
-package com.ubereats;
+package com.ubereats.Decorator;
 
 public class SizeDecorator extends MenuItemDecorator{
     private Size size;

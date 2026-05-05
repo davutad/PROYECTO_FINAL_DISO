@@ -1,4 +1,4 @@
-package com.ubereats;
+package com.ubereats.Decorator;
 
 public class ExtraDecorator extends MenuItemDecorator{
     private String extraName;
