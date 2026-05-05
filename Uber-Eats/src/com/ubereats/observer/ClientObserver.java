@@ -1,6 +1,7 @@
 package com.ubereats.observer;
 
 import com.ubereats.Order;
+import com.ubereats.Client;
 
 public class ClientObserver implements OrderObserver{
 	

@@ -1,12 +1,13 @@
 package com.ubereats.observer;
 
 import com.ubereats.Order;
+import com.ubereats.User;
 
 public class DeliveryDriverObserver implements OrderObserver{
 	
-	private DeliveryDriver deliveryDriver;
+	private User deliveryDriver;
 	
-	public DeliveryDriverObserver(DeliveryDriver deliveryDriver) {
+	public DeliveryDriverObserver(User deliveryDriver) {
 		this.deliveryDriver = deliveryDriver;
 	}
 
