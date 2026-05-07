@@ -1,12 +1,11 @@
 package com.ubereats;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.ubereats.observer.*;
 import com.ubereats.state.OrderState;
 import com.ubereats.state.PendingState;
 import com.ubereats.strategy.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Order implements OrderObservable{
 
@@ -81,6 +80,8 @@ public class Order implements OrderObservable{
 		orderState.manageState(this);
 	}
 	
+	// TODO creo que falta un cancelar pedido
+
 	public void payOrder(Double amount) {
 		paymentMethod.pay(amount);
 	}

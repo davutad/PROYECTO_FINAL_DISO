@@ -7,8 +7,6 @@ public class Restaurant extends User {
         super(username);
         this.menu = new Menu();
     }
-
-    // TODO logica de observers
     
     @Override
     public String toString() {
