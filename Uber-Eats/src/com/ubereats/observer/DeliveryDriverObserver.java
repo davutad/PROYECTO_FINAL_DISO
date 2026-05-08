@@ -1,16 +1,17 @@
 package com.ubereats.observer;
 
+import com.ubereats.DeliveryDriver;
 import com.ubereats.Order;
 import com.ubereats.User;
 
 public class DeliveryDriverObserver implements OrderObserver{
 	
-	private User deliveryDriver;
+	private DeliveryDriver deliveryDriver;
 	
-	public DeliveryDriverObserver(User deliveryDriver) {
+	public DeliveryDriverObserver(DeliveryDriver deliveryDriver) {
 		this.deliveryDriver = deliveryDriver;
 	}
-
+ 
 	@Override
 	public void update(Order order) {
 		System.out.println("Delivery driver " + deliveryDriver.getUsername() 

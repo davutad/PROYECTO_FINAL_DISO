@@ -1,8 +1,7 @@
 package com.ubereats;
 
 import com.ubereats.observer.*;
-import com.ubereats.state.OrderState;
-import com.ubereats.state.PendingState;
+import com.ubereats.state.*;
 import com.ubereats.strategy.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +85,14 @@ public class Order implements OrderObservable{
 		orderState.manageState(this);
 	}
 	
-	// TODO creo que falta un cancelar pedido
+	//Metodo cancelar pedido
+	public void cancelOrder() {
+		if(orderState instanceof DeliveredState) {
+			System.out.println("No se puede cancelar un pedido ya entregado");
+			return;
+		}
+		this.orderState = new CancelledState();
+	}
 
 	public void payOrder(Double amount) {
 		paymentMethod.pay(amount);
@@ -117,12 +123,5 @@ public class Order implements OrderObservable{
 	}
 
 	// TODO falta un metodo "validate" que vea que todos los campos necesarios de pedido no sean nulos
-	public Boolean validateOrder() {
-		if(this.getRestaurant() != null && this.getClient() != null && this.getDeliveryDriver() != null) {
-			return true;
-		}else {
-			return false;
-		}
 	
-	}
 }

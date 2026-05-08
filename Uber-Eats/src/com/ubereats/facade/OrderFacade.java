@@ -31,6 +31,10 @@ public class OrderFacade {
 
 		order.setOrderState(new PreparingState());
 	}
+	
+	public void cancelOrder(Order order) {
+		order.cancelOrder();
+	}
 }
 
 /* 
