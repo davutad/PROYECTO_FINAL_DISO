@@ -21,12 +21,9 @@ public class Test {
         PaymentMethodStrategy paymentMethod = new CardPaymentStrategy("1234567812345678");
 
         // Crear pedido
-        Order order = new Order(
-            restaurant,
-            deliveryDriver,
-            client,
-            paymentMethod
-        );
+        Order order = new Order();
+
+        
 
         // Crear observadores
         RestaurantObserver restaurantObserver = new RestaurantObserver(restaurant);
@@ -39,9 +36,6 @@ public class Test {
         // Cliente y repartidor reciben las actualizaciones de estado
         order.addObserver(clientObserver);
         order.addObserver(deliveryDriverObserver);
-
-        // Pagar pedido
-        order.payOrder(24.95);
 
         // Avanzar estados del pedido
         order.updateOrderState(); // Pendiente -> En preparación

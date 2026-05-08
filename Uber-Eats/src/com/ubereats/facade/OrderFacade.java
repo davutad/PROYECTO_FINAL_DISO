@@ -3,7 +3,6 @@ package com.ubereats.facade;
 import java.util.List;
 
 import com.ubereats.Client;
-import com.ubereats.DeliveryDriver;
 import com.ubereats.MenuItem;
 import com.ubereats.Order;
 import com.ubereats.Restaurant;
@@ -17,15 +16,16 @@ public class OrderFacade {
 		this.order = new Order();
 	}
 
-	//FALTAN PARAMETROS :/
-	public void createOrder(){
-		order.setClient(selectClient()); // TODO select client
+	public void createOrder(Client client, Restaurant restaurant, List<MenuItem> menuItems, PaymentMethodStrategy paymentMethod) {
+		order.setClient(client);
 
-		order.setRestaurant(selectRestaurant()); // TODO select restaurante
+		order.setRestaurant(restaurant);
 
-		order.addMenuItem(selecMenuItems(order.getRestaurant())); // TODO select menu items
+		for (MenuItem menuItem : menuItems) {
+			order.addMenuItem(menuItem);
+		}
 
-		order.setPaymentMethod(selectPaymentMethod()); // TODO select payment method
+		order.setPaymentMethod(paymentMethod);
 
 		order.payOrder(order.calculateTotalPrice());
 
