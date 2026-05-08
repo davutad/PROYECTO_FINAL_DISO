@@ -6,7 +6,6 @@ import com.ubereats.Client;
 import com.ubereats.MenuItem;
 import com.ubereats.Order;
 import com.ubereats.Restaurant;
-import com.ubereats.state.PreparingState;
 import com.ubereats.strategy.PaymentMethodStrategy;
 
 public class OrderFacade {
@@ -29,7 +28,7 @@ public class OrderFacade {
 
 		order.payOrder(order.calculateTotalPrice());
 
-		order.setOrderState(new PreparingState());
+		order.updateOrderState();
 	}
 	
 	public void cancelOrder(Order order) {
