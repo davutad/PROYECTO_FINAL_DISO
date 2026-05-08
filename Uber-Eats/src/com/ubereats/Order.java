@@ -57,7 +57,7 @@ public class Order implements OrderObservable{
 		return this.orderState;
 	}
 
-	// TODO Es el update del uml???
+
 	public void setOrderState(OrderState orderState) {
 		this.orderState = orderState;
 	}
@@ -77,7 +77,6 @@ public class Order implements OrderObservable{
 	
 	@Override
 	public void notifyObservers() {
-		// TODO Auto-generated method stub
 		for(OrderObserver orderObserver: this.orderObservers) {
 			orderObserver.update(this);
 		}
@@ -96,11 +95,17 @@ public class Order implements OrderObservable{
 	public void addMenuItem(MenuItem menuItem) {
 		menuItems.add(menuItem);
 	}
-
-	// TODO falta toString
+	
 
 	public void setPaymentMethod(PaymentMethodStrategy paymentMethod) {
 		this.paymentMethod = paymentMethod;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", restaurant=" + restaurant + ", deliveryDriver=" + deliveryDriver + ", client="
+				+ client + ", menuItems=" + menuItems + ", orderState=" + orderState + ", paymentMethod="
+				+ paymentMethod + "]";
 	}
 
 	public Double calculateTotalPrice() {
@@ -112,4 +117,12 @@ public class Order implements OrderObservable{
 	}
 
 	// TODO falta un metodo "validate" que vea que todos los campos necesarios de pedido no sean nulos
+	public Boolean validateOrder() {
+		if(this.getRestaurant() != null && this.getClient() != null && this.getDeliveryDriver() != null) {
+			return true;
+		}else {
+			return false;
+		}
+	
+	}
 }
