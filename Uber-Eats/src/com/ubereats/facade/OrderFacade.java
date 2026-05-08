@@ -12,8 +12,8 @@ import com.ubereats.strategy.PaymentMethodStrategy;
 public class OrderFacade {
 	private final Order order;
 
-	public OrderFacade() {
-		this.order = new Order();
+	public OrderFacade(Order order) {
+		this.order = order;
 	}
 
 	public void createOrder(Client client, Restaurant restaurant, List<MenuItem> menuItems, PaymentMethodStrategy paymentMethod) {
@@ -55,4 +55,5 @@ public Order createOrder(Client client) {
 		order.setDeliveryDriver(assignedDriver);
 
 		return order;
-	}*/
+	}
+*/

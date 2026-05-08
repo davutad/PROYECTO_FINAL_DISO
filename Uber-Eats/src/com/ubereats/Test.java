@@ -1,5 +1,6 @@
 package com.ubereats;
 
+import com.ubereats.facade.OrderFacade;
 import com.ubereats.observer.ClientObserver;
 import com.ubereats.observer.DeliveryDriverObserver;
 import com.ubereats.observer.RestaurantObserver;
@@ -16,14 +17,14 @@ public class Test {
         Restaurant restaurant = new Restaurant("Pizzeria Roma");
         Client client = new Client("Carlos");
         DeliveryDriver deliveryDriver = new DeliveryDriver("Repartidor01");
+        MenuItem pizza = new MenuItem("Pizza Margherita", 8.99, "Deliciosa pizza con tomate, mozzarella y albahaca");
 
         // Crear estrategia de pago
         PaymentMethodStrategy paymentMethod = new CardPaymentStrategy("1234567812345678");
 
         // Crear pedido
         Order order = new Order();
-
-        
+        OrderFacade orderFacade = new OrderFacade(order);
 
         // Crear observadores
         RestaurantObserver restaurantObserver = new RestaurantObserver(restaurant);
@@ -64,6 +65,10 @@ public class Test {
                     resgiterUserMenu(sc);
                     break;
 
+                case 3:
+                    orderFacade.createOrder(client, restaurant, restaurant.getMenuItems(), paymentMethod);
+                    break;
+                
                 case 6:
                     System.out.println("Exiting...");
                     break;
