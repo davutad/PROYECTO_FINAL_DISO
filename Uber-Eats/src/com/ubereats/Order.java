@@ -15,17 +15,16 @@ public class Order implements OrderObservable{
 	private Restaurant restaurant;
 	private DeliveryDriver deliveryDriver;
 	private Client client;
+	private List<MenuItem> menuItems;
 
 	private OrderState orderState;
 	private PaymentMethodStrategy paymentMethod;
 	private List<OrderObserver> orderObservers;
+
 	
-	public Order(Restaurant restaurant, DeliveryDriver deliveryDriver, Client client ,PaymentMethodStrategy paymentMethod) {
+	public Order() {
 		this.id = nextId++;
-		this.restaurant = restaurant;
-		this.deliveryDriver = deliveryDriver;
-		this.client = client;
-		this.paymentMethod = paymentMethod;
+		this.menuItems = new ArrayList<>();
 		this.orderState = new PendingState();
 		this.orderObservers = new ArrayList<>();
 	}
@@ -38,6 +37,10 @@ public class Order implements OrderObservable{
         return restaurant;
     }
 
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;	
+	}
+	
     public DeliveryDriver getDeliveryDriver() {
         return deliveryDriver;
     }
@@ -46,6 +49,10 @@ public class Order implements OrderObservable{
         return client;
     }
 
+	public void setClient(Client client) {
+		this.client = client;
+	}
+	
 	public OrderState getOrderState() {
 		return this.orderState;
 	}
@@ -84,5 +91,23 @@ public class Order implements OrderObservable{
 
 	public void payOrder(Double amount) {
 		paymentMethod.pay(amount);
+	}
+
+	public void addMenuItem(MenuItem menuItem) {
+		menuItems.add(menuItem);
+	}
+
+	// TODO falta toString
+
+	public void setPaymentMethod(PaymentMethodStrategy paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public Double calculateTotalPrice() {
+		Double total = 0.0;
+		for (MenuItem menuItem : menuItems) {
+			total += menuItem.price;
+		}
+		return total;
 	}
 }
