@@ -6,6 +6,9 @@ import com.ubereats.observer.DeliveryDriverObserver;
 import com.ubereats.observer.RestaurantObserver;
 import com.ubereats.strategy.CardPaymentStrategy;
 import com.ubereats.strategy.PaymentMethodStrategy;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Test {
@@ -18,8 +21,15 @@ public class Test {
         Client client = new Client("Carlos");
         DeliveryDriver deliveryDriver = new DeliveryDriver("Repartidor01");
         MenuItem pizza = new MenuItem("Pizza Margherita", 8.99, "Deliciosa pizza con tomate, mozzarella y albahaca");
+        MenuItem pasta = new MenuItem("Pasta Carbonara", 10.99, "Pasta con salsa de huevo, queso y panceta");
+        MenuItem salad = new MenuItem("Ensalada César", 6.99, "Ensalada con lechuga, pollo, croutons y aderezo César");
 
-        // Crear estrategia de pago
+        List<MenuItem> menuItems = new ArrayList<>();
+        menuItems.add(pizza);
+        menuItems.add(pasta);
+        menuItems.add(salad);
+
+        // Crear estrategia de pago 
         PaymentMethodStrategy paymentMethod = new CardPaymentStrategy("1234567812345678");
 
         // Crear pedido
@@ -66,7 +76,7 @@ public class Test {
                     break;
 
                 case 3:
-                    orderFacade.createOrder(client, restaurant, restaurant.getMenuItems(), paymentMethod);
+                    orderFacade.createOrder(client, restaurant, menuItems, paymentMethod);
                     break;
                 
                 case 6:
