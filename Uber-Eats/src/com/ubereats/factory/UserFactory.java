@@ -5,10 +5,17 @@ import com.ubereats.User;
 public abstract class UserFactory {
 
     public User registerUser(String username) {
-        // TODO no estoy seguro si es buena idea que tenga parametros esto o deberia crear usuarios vacios y luego configurar cada uno, pero por ahora lo dejo asi
+        if (checkInvalidUsername(username)) {
+            throw new IllegalArgumentException("Invalid username");
+        }
         User u = createUser(username);
-        // TODO aqui va la configuracion extra concreta de cada tipo de usuario, y hay que agregar los observers de pedidos
+        // TODO no se si al final hay que añadir observers a los users
         return u;
+    }
+
+    public boolean checkInvalidUsername(String username) {
+        // Aqui se pueden agregar mas validaciones para un uso real
+        return username.isEmpty();
     }
 
     protected abstract User createUser(String username);

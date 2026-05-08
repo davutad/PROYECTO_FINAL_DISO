@@ -12,12 +12,13 @@ Pasos de uso:
 
 
 PATRONES A USAR:
-- factory Jose: uml y esqueleto: 60%
-- facade rodrigamer: solo UML 10%
-- decorator jacob david: solo tenemos UML 10%
-- observer David y Dani: uml e interfaces 20%
-- strategy Dani: uml casi todo hecho 60%
-- state  Dani: pensar metodos pago monedero uml y casi todo hecho 60%
+- factory Jose: uml y esqueleto: faltan metodos concretos y implmentacion en el main 70%
+- facade rodrigamer: solo UML y estructura 40%
+- decorator jacob david: ??% - NECESITAMOS QUE REVISEIS MENU ITEM (AHORA MISMO HAY 2 DISTINTOS, mirad como lo quereis dejar)
+- observer David y Dani: creo que solo revisarlo 90%
+- strategy Dani: creo que solo revisarlo 90%
+- state  Dani: creo que solo revisarlo 90%
 - template (no estamos seguros) rodri
+- main y contexto principal (server manager) Jose: 70%
 
 

@@ -110,4 +110,6 @@ public class Order implements OrderObservable{
 		}
 		return total;
 	}
+
+	// TODO falta un metodo "validate" que vea que todos los campos necesarios de pedido no sean nulos
 }

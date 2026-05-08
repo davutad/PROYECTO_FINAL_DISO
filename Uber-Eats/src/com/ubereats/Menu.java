@@ -71,10 +71,13 @@ public class Menu {
                 if (!item.extras.isEmpty()) {
                     System.out.println("    Extras:");
                     for (Map.Entry<String, Double> extra : item.extras.entrySet()) {
-                        System.out.println("      " + extra.getKey() + " - $" + extra.getValue());
+                        System.out.println("      " + extra.getKey() + " - €" + extra.getValue());
                     }
                 }
             }
         }
     }
 }
+
+
+// TODO arreglar esta clase porque tenia la idea antigua de menu item
