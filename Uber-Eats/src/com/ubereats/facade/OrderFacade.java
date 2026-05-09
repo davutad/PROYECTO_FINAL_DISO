@@ -22,7 +22,6 @@ public class OrderFacade {
 
 	public void createOrder(Client client, Restaurant restaurant, List<MenuItemComponent> menuItems, PaymentMethodStrategy paymentMethod) {
 		
-		DeliveryDriver driver = ServerManager.getInstance();//TODO (.assingDriver()) asignar deliveryDriver con el "algoritmo para ordenarlos" que va a estar dentro de serverManager
 		
 		order.setClient(client);
 		order.setRestaurant(restaurant);
@@ -31,6 +30,8 @@ public class OrderFacade {
 		for (MenuItemComponent menuItem : menuItems) {
 			order.addMenuItem(menuItem);
 		}
+
+		DeliveryDriver driver = ServerManager.getInstance().assignDriver();
 
 		//Añadir observadores al pedido(No se como gesstionar el observador de deliveryDriver)
 		order.addObserver(new ClientObserver(client));

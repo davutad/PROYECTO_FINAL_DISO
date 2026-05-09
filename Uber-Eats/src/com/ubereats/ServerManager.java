@@ -111,4 +111,23 @@ public class ServerManager {
         if (index >= 0 && index < deliveryDrivers.size())
             deliveryDrivers.remove(index);
     }
+
+    public DeliveryDriver assignDriver() {
+        DeliveryDriver assignedDriver = null;
+        
+        for (DeliveryDriver driver : deliveryDrivers) {
+        if (assignedDriver == null) {
+            assignedDriver = driver;
+        } else if (driver.getAssignedOrders() == 0) {
+            // Encontramos uno con 0 pedidos, es el óptimo
+            assignedDriver = driver;
+            break;
+        } else if (driver.getAssignedOrders() < assignedDriver.getAssignedOrders()) {
+            // Tiene menos pedidos que el actual candidato
+            assignedDriver = driver;
+        }
+    }
+        return assignedDriver;
+        
+    }
 }
