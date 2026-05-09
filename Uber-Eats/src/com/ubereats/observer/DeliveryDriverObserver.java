@@ -2,7 +2,8 @@ package com.ubereats.observer;
 
 import com.ubereats.DeliveryDriver;
 import com.ubereats.Order;
-import com.ubereats.User;
+import com.ubereats.state.CancelledState;
+import com.ubereats.state.DeliveredState;
 
 public class DeliveryDriverObserver implements OrderObserver{
 	
@@ -15,9 +16,15 @@ public class DeliveryDriverObserver implements OrderObserver{
 	@Override
 	public void update(Order order) {
 		System.out.println("Delivery driver " + deliveryDriver.getUsername() 
-        + ": order status updated to: " + order.getOrderState());
-		// TODO falta un order ID + cliente para identificar el pedido
-		// realmente el driver solo deberia recibir notificacion cuando se crea el pedido y cuando este listo para recoger
+        + "el pedido #" + order.getId() + " del cliente " + order.getClient().getUsername() + "ha cambiado a " 
+		+ order.getOrderState());
+		
+	//Aquí empezamos con los cambios de la lista de pedidos, en caso de entregado o cancelado, se saca de la lista
+
+		if (order.getOrderState() instanceof DeliveredState || order.getOrderState() instanceof CancelledState) {
+            deliveryDriver.removeOrder(order);
+    	}
+
 	}
 
 }
