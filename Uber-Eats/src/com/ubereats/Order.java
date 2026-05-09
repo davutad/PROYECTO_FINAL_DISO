@@ -1,5 +1,6 @@
 package com.ubereats;
 
+import com.ubereats.Decorator.MenuItemComponent;
 import com.ubereats.observer.*;
 import com.ubereats.state.*;
 import com.ubereats.strategy.*;
@@ -14,7 +15,7 @@ public class Order implements OrderObservable {
 	private Restaurant restaurant;
 	private DeliveryDriver deliveryDriver;
 	private Client client;
-	private List<MenuItem> menuItems;
+	private List<MenuItemComponent> menuItems;
 
 	private OrderState orderState;
 	private PaymentMethodStrategy paymentMethod;
@@ -95,7 +96,7 @@ public class Order implements OrderObservable {
 		paymentMethod.pay(amount);
 	}
 
-	public void addMenuItem(MenuItem menuItem) {
+	public void addMenuItem(MenuItemComponent menuItem) {
 		menuItems.add(menuItem);
 	}
 
@@ -105,8 +106,8 @@ public class Order implements OrderObservable {
 
 	public Double calculateTotalPrice() {
 		Double total = 0.0;
-		for (MenuItem menuItem : menuItems) {
-			total += menuItem.price;
+		for (MenuItemComponent menuItem : menuItems) {
+			total += menuItem.getPrice();
 		}
 		return total;
 	}
