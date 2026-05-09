@@ -1,15 +1,10 @@
 package com.ubereats.Decorator;
 
-/*
-Decorador que elimina un ingrediente del producto.
-Puede reducir el precio aplicando un descuento asociado al ingrediente eliminado.
-*/
-
-public class NoIngredientDecorator extends MenuItemDecorator{
+public class NoIngredientDecorator extends MenuItemDecorator {
     private String ingredient;
     private Double discount;
 
-    public NoIngredientDecorator(MenuItemComponent menuItemComponent, String ingredient, Double discount){
+    public NoIngredientDecorator(MenuItemComponent menuItemComponent, String ingredient, Double discount) {
         super(menuItemComponent);
         this.ingredient = ingredient;
         this.discount = discount;
@@ -17,12 +12,13 @@ public class NoIngredientDecorator extends MenuItemDecorator{
 
     @Override
     public String getName() {
-        return menuItemComponent.getName() + " (without " + ingredient + ")";
+        return menuItemComponent.getName() + " (sin " + ingredient + ")";
     }
 
     @Override
     public double getPrice() {
-        return menuItemComponent.getPrice() - discount;
+        double newPrice = menuItemComponent.getPrice() - discount;
+        return newPrice < 0 ? 0 : newPrice;
     }
 
     @Override

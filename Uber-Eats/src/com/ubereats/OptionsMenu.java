@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.ubereats.Decorator.MenuItem;
-//Nuevos imports
-import com.ubereats.Decorator.MenuItemComponent;
 import com.ubereats.observer.ClientObserver;
 import com.ubereats.observer.DeliveryDriverObserver;
 import com.ubereats.observer.RestaurantObserver;
@@ -14,6 +11,12 @@ import com.ubereats.strategy.CardPaymentStrategy;
 import com.ubereats.strategy.CashPaymentStrategy;
 import com.ubereats.strategy.PaypalPaymentStrategy;
 import com.ubereats.strategy.PaymentMethodStrategy;
+//Nuevos imports
+import com.ubereats.Decorator.*;
+import com.ubereats.facade.OrderFacade;
+import com.ubereats.observer.*;
+import com.ubereats.strategy.*;
+
 
 public class OptionsMenu {
     private final ServerManager serverManager;
@@ -22,9 +25,8 @@ public class OptionsMenu {
     public OptionsMenu(ServerManager serverManager, Scanner sc) {
         this.serverManager = serverManager;
         this.sc = sc;
-    } 
+    }
 
-    // TODO falta rellenar el menu cuando se registra un restaurante
     public void resgiterUserMenu() {
         System.out.println("Select user type to register:");
         System.out.println(" 1. Client");
@@ -43,7 +45,13 @@ public class OptionsMenu {
                 serverManager.registerClient(username);
                 break;
             case 2:
-                serverManager.registerRestaurant(username);
+                Restaurant r = serverManager.registerRestaurant(username);
+                // Rellenamos el menú por defecto al registrar un restaurante
+                r.addMenuItem(
+                        new BasicMenuItem("Hamburguesa Clásica", 8.50, "Hamburguesa de ternera con lechuga y tomate"));
+                r.addMenuItem(new BasicMenuItem("Pizza Margarita", 10.00, "Pizza con salsa de tomate y mozzarella"));
+                r.addMenuItem(
+                        new BasicMenuItem("Ensalada César", 7.00, "Ensalada con pollo, picatostes y salsa césar"));
                 break;
             case 3:
                 serverManager.registerDeliveryDriver(username);
@@ -109,6 +117,7 @@ public class OptionsMenu {
     }
 
     public void simulateNewOrder() {
+
         // Antes de crear el pedido, se comprueba que existan los datos mínimos necesarios.
         if (serverManager.getClients().isEmpty()) {
             System.out.println("No hay clientes registrados.");
@@ -122,15 +131,24 @@ public class OptionsMenu {
 
         if (serverManager.getDeliveryDrivers().isEmpty()) {
             System.out.println("No hay repartidores registrados.");
+
+        if (serverManager.getClients().isEmpty() || serverManager.getRestaurants().isEmpty()) {
+            System.out.println("Debe haber al menos un cliente y un restaurante registrados para hacer un pedido.");
+
             return;
         }
 
         System.out.println("Choose a client: ");
         serverManager.printClients();
 
+
         // Se resta 1 porque el usuario elige empezando en 1, pero las listas en Java empiezan en 0.
         Client client = serverManager.getClients().get(sc.nextInt() - 1);
         sc.nextLine(); // Limpia el salto de línea pendiente después de nextInt().
+
+        Client c = serverManager.getClients().get(sc.nextInt() - 1);
+        sc.nextLine();
+
 
         System.out.println("Choose a restaurant: ");
         serverManager.printRestaurants();
@@ -196,17 +214,85 @@ public class OptionsMenu {
 
         System.out.println();
     }
+    }
 
    
     public void chooseItemsToOrder(Restaurant restaurant, Order order) {
         restaurant.printMenu();
 
         // Bucle indefinido para permitir añadir varios productos hasta que el usuario escriba 0.
+
+        List<MenuItemComponent> itemsToOrder = new ArrayList<>();
+        chooseItemsToOrder(restaurant, itemsToOrder);
+
+        if (itemsToOrder.isEmpty()) {
+            System.out.println("No se han seleccionado productos. Pedido cancelado.");
+            return;
+        }
+
+        // Asignar el primer repartidor disponible
+        if (serverManager.getDeliveryDrivers().isEmpty()) {
+            System.out.println("No hay repartidores registrados. Por favor, registre uno primero.");
+            return;
+        }
+        DeliveryDriver driver = serverManager.getDeliveryDrivers().get(0);
+
+        // Elegir método de pago
+        System.out.println("Seleccione método de pago:");
+        System.out.println(" 1. Efectivo");
+        System.out.println(" 2. Tarjeta de Crédito");
+        System.out.println(" 3. PayPal");
+        int payOpt = sc.nextInt();
+        sc.nextLine();
+        PaymentMethodStrategy paymentStrategy;
+        if (payOpt == 2) {
+            System.out.println("Introduzca número de tarjeta: ");
+            String card = sc.nextLine();
+            paymentStrategy = new CardPaymentStrategy(card);
+        } else if (payOpt == 3) {
+            System.out.println("Introduzca cuenta de PayPal: ");
+            String pp = sc.nextLine();
+            paymentStrategy = new PaypalPaymentStrategy(pp);
+        } else {
+            paymentStrategy = new CashPaymentStrategy();
+        }
+
+        // Crear el pedido
+        Order newOrder = new Order();
+        newOrder.setDeliveryDriver(driver);
+
+        Client c = new Client(null);
+        Restaurant r = new Restaurant(null);
+        // Conectar los observadores
+        newOrder.addObserver(new ClientObserver(c));
+        
+        newOrder.addObserver(new RestaurantObserver(r));
+        newOrder.addObserver(new DeliveryDriverObserver(driver));
+
+        // Aplicar la fachada
+        OrderFacade facade = new OrderFacade(newOrder);
+        facade.createOrder(c, r, itemsToOrder, paymentStrategy);
+
+        // Registrar en las listas globales y de usuarios
+        serverManager.addOrder(newOrder);
+        c.addOrder(newOrder);
+        r.addOrder(newOrder);
+        driver.addOrder(newOrder);
+
+        System.out.println("Pedido creado con éxito.");
+        System.out.println(newOrder);
+        System.out.println();
+    }
+
+    public void chooseItemsToOrder(Restaurant r, List<MenuItemComponent> itemsToOrder) {
+        r.printMenu();
+
         while (true) {
             System.out.println("Enter item number to add to order (0 to finish): ");
 
             // Se resta 1 para adaptar la elección del usuario al índice real de la lista.
             int itemIndex = sc.nextInt() - 1;
+
             sc.nextLine(); // Limpia el salto de línea pendiente después de nextInt().
 
             // Si el usuario escribe 0, itemIndex será -1 y se termina la selección.
@@ -215,55 +301,131 @@ public class OptionsMenu {
             }
 
             // Evita acceder a una posición inexistente del menú.
-            if (itemIndex < 0 || itemIndex >= restaurant.getMenu().size()) {
+            if (itemIndex < 0 || itemIndex >= r.getMenu().size()) {
+
+            sc.nextLine();
+            if (itemIndex == -1) {
+                break;
+            }
+            if (itemIndex < 0 || itemIndex >= r.getMenu().size()) {
+
                 System.out.println("Invalid item number.");
                 continue;
             }
 
             // Se obtiene el producto seleccionado y se añade al pedido.
-            MenuItemComponent selectedItem = restaurant.getMenu().get(itemIndex);
-            order.addMenuItem(selectedItem);
+            MenuItemComponent selectedItem = r.getMenu().get(itemIndex);
+            //.addMenuItem(selectedItem);
 
             System.out.println("Item added: " + selectedItem.getName());
+
+            // Obtenemos el producto base
+            selectedItem = r.getMenu().get(itemIndex);
+
+            // Menú interactivo para aplicar el patrón Decorator en tiempo real
+            boolean decorating = true;
+            while (decorating) {
+                System.out.println("\nProducto actual: " + selectedItem.getName() + " | Precio: "
+                        + String.format("%.2f", selectedItem.getPrice()) + "$");
+                System.out.println("¿Desea personalizar este producto aplicando decoradores?");
+                System.out.println(" 1. Añadir Extra (+ ingrediente y precio)");
+                System.out.println(" 2. Cambiar Tamaño (multiplicador de precio)");
+                System.out.println(" 3. Quitar Ingrediente (descuento)");
+                System.out.println(" 4. Aplicar Descuento porcentual");
+                System.out.println(" 5. Finalizar personalización y añadir al pedido");
+
+                int decOpt = sc.nextInt();
+                sc.nextLine();
+
+                switch (decOpt) {
+                    case 1:
+                        System.out.println("Introduzca el nombre del extra (ej. Queso, Bacon): ");
+                        String extraName = sc.nextLine();
+                        System.out.println("Introduzca el precio del extra (ej. 1.50): ");
+                        double extraPrice = sc.nextDouble();
+                        sc.nextLine();
+                        selectedItem = new ExtraDecorator(selectedItem, extraName, extraPrice);
+                        break;
+                    case 2:
+                        System.out.println("Seleccione el tamaño:");
+                        System.out.println(" 1. SMALL (x0.8)");
+                        System.out.println(" 2. MEDIUM (x1.0)");
+                        System.out.println(" 3. LARGE (x1.3)");
+                        System.out.println(" 4. EXTRA_LARGE (x1.6)");
+                        int sizeOpt = sc.nextInt();
+                        sc.nextLine();
+                        Size size = Size.MEDIUM;
+                        if (sizeOpt == 1)
+                            size = Size.SMALL;
+                        else if (sizeOpt == 3)
+                            size = Size.LARGE;
+                        else if (sizeOpt == 4)
+                            size = Size.EXTRA_LARGE;
+                        selectedItem = new SizeDecorator(selectedItem, size);
+                        break;
+                    case 3:
+                        System.out.println("Introduzca el ingrediente a quitar (ej. Cebolla): ");
+                        String noIng = sc.nextLine();
+                        System.out.println("Introduzca el descuento aplicado por quitarlo (ej. 0.50): ");
+                        double noIngDisc = sc.nextDouble();
+                        sc.nextLine();
+                        selectedItem = new NoIngredientDecorator(selectedItem, noIng, noIngDisc);
+                        break;
+                    case 4:
+                        System.out.println("Introduzca el porcentaje de descuento (ej. 0.15 para 15%): ");
+                        double disc = sc.nextDouble();
+                        sc.nextLine();
+                        selectedItem = new DiscountDecorator(selectedItem, disc);
+                        break;
+                    case 5:
+                        decorating = false;
+                        break;
+                    default:
+                        System.out.println("Opción no válida.");
+                }
+            }
+
+            itemsToOrder.add(selectedItem);
+            System.out.println("Item final añadido: " + selectedItem.getName());
+            System.out.println();
+
         }
     }
+    }
 
-
-    //
-    public void updateOrderStateMenu(){
+    public void updateOrderStateMenu() {
         Order orderToUpdate = chooseOrder();
-        if(orderToUpdate == null){
+        if (orderToUpdate == null) {
             return;
         }
         orderToUpdate.updateOrderState();
-        System.out.println("Order " + orderIndex + " state updated to: " + orderToUpdate.getOrderState());
+        System.out.println("Order state updated to: " + orderToUpdate.getOrderState());
         System.out.println();
-        // TODO falta que los users a traves del observer hagan algo respecto a estos updates
     }
 
-    public void cancelOrderMenu(){
+    public void cancelOrderMenu() {
         Order orderToCancel = chooseOrder();
-        if(orderToCancel == null){
+        if (orderToCancel == null) {
             return;
         }
         orderToCancel.cancelOrder();
-        System.out.println("Order " + orderIndex + " cancelled.");
+        System.out.println("Order cancelled.");
         System.out.println();
-        // TODO no se que hacer si en algun momento quitar los pedidos cancelados o finalizados de la lista de pedidos del server, o si simplemente se quedan ahi
     }
 
-    private Order chooseOrder(){
+    private Order chooseOrder() {
         System.out.println("Choose an order: ");
         serverManager.printOrders();
         System.out.print("Enter order number: ");
         int orderIndex = sc.nextInt() - 1;
         sc.nextLine();
-        if(orderIndex < 0 || orderIndex >= serverManager.getOrders().size()){
+        if (orderIndex < 0 || orderIndex >= serverManager.getOrders().size()) {
             System.out.println("Invalid order number.");
             return null;
         }
         return serverManager.getOrders().get(orderIndex);
     }
+
 
 
     private PaymentMethodStrategy choosePaymentMethod() {
@@ -293,8 +455,11 @@ public class OptionsMenu {
                 System.out.println("Invalid option. Cash selected by default.");
                 return new CashPaymentStrategy();
         }
-    }
+    
+
 }
 
 
 // TODO falta metodo para enseñar todos los pedidos finalizados o cancelados y otro para los pedidos en curso, ademas podriamos tener un metodo de eliminar pedidos finalizados o cancelados de la lista de pedidos del server, aunque no se si es necesario o si simplemente se quedan ahi para tener un historial de pedidos
+
+}
