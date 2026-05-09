@@ -6,10 +6,10 @@ import com.ubereats.strategy.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order implements OrderObservable{
+public class Order implements OrderObservable {
 
 	private static int nextId = 1;
-	
+
 	private int id;
 	private Restaurant restaurant;
 	private DeliveryDriver deliveryDriver;
@@ -20,7 +20,6 @@ public class Order implements OrderObservable{
 	private PaymentMethodStrategy paymentMethod;
 	private List<OrderObserver> orderObservers;
 
-	
 	public Order() {
 		this.id = nextId++;
 		this.menuItems = new ArrayList<>();
@@ -29,65 +28,63 @@ public class Order implements OrderObservable{
 	}
 
 	public int getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
 
 	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;	
+		this.restaurant = restaurant;
 	}
-	
-    public DeliveryDriver getDeliveryDriver() {
-        return deliveryDriver;
-    }
 
-    public Client getClient() {
-        return client;
-    }
+	public DeliveryDriver getDeliveryDriver() {
+		return deliveryDriver;
+	}
+
+	public Client getClient() {
+		return client;
+	}
 
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	
+
 	public OrderState getOrderState() {
 		return this.orderState;
 	}
 
-
 	public void setOrderState(OrderState orderState) {
 		this.orderState = orderState;
 	}
-	
 
 	@Override
 	public void addObserver(OrderObserver orderObserver) {
 		orderObservers.add(orderObserver);
-		
+
 	}
 
 	@Override
 	public void deleteObserver(OrderObserver orderObserver) {
 		orderObservers.remove(orderObserver);
-		
+
 	}
-	
+
 	@Override
 	public void notifyObservers() {
-		for(OrderObserver orderObserver: this.orderObservers) {
+		for (OrderObserver orderObserver : this.orderObservers) {
 			orderObserver.update(this);
 		}
 	}
-	
+
 	public void updateOrderState() {
 		orderState.manageState(this);
 	}
-	
-	//Metodo cancelar pedido
+
+	// Metodo cancelar pedido
 	public void cancelOrder() {
-		if(orderState instanceof DeliveredState) {
+		if (orderState instanceof DeliveredState) {
 			System.out.println("No se puede cancelar un pedido ya entregado");
 			return;
 		}
@@ -101,17 +98,9 @@ public class Order implements OrderObservable{
 	public void addMenuItem(MenuItem menuItem) {
 		menuItems.add(menuItem);
 	}
-	
 
 	public void setPaymentMethod(PaymentMethodStrategy paymentMethod) {
 		this.paymentMethod = paymentMethod;
-	}
-
-	@Override
-	public String toString() {
-		return "Order [id=" + id + ", restaurant=" + restaurant + ", deliveryDriver=" + deliveryDriver + ", client="
-				+ client + ", menuItems=" + menuItems + ", orderState=" + orderState + ", paymentMethod="
-				+ paymentMethod + "]";
 	}
 
 	public Double calculateTotalPrice() {
@@ -122,6 +111,20 @@ public class Order implements OrderObservable{
 		return total;
 	}
 
-	// TODO falta un metodo "validate" que vea que todos los campos necesarios de pedido no sean nulos
-	
+	public boolean validate() {
+		if (client == null || restaurant == null || menuItems.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		String clientName = (client != null) ? client.getUsername() : "Desconocido";
+		String restName = (restaurant != null) ? restaurant.getUsername() : "Desconocido";
+		return "Pedido #" + id + " | Estado: [" + orderState.getClass().getSimpleName() + "] | " +
+				"Cliente: " + clientName + " | Restaurante: " + restName + " | Total: " +
+				String.format("%.2f", calculateTotalPrice()) + "$";
+	}
+
 }

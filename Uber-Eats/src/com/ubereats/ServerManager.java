@@ -6,8 +6,6 @@ import com.ubereats.factory.RestaurantFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-
-// context
 public class ServerManager {
 
     private ClientFactory clientFactory = new ClientFactory();
@@ -20,13 +18,13 @@ public class ServerManager {
     private List<DeliveryDriver> deliveryDrivers;
     private List<Order> orders;
 
-
     private static ServerManager instance = new ServerManager();
 
     private ServerManager() {
         restaurants = new ArrayList<>();
         clients = new ArrayList<>();
         deliveryDrivers = new ArrayList<>();
+        orders = new ArrayList<>();
     }
 
     public static ServerManager getInstance() {
@@ -36,15 +34,23 @@ public class ServerManager {
     public List<Restaurant> getRestaurants() {
         return restaurants;
     }
+
     public List<Client> getClients() {
         return clients;
     }
+
     public List<DeliveryDriver> getDeliveryDrivers() {
         return deliveryDrivers;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
 
-    // TODO refactorizar esto para que no se repita codigo, a lo mejor con enum userType o tipos genericos
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
+
     public Client registerClient(String username) {
         Client c = (Client) clientFactory.registerUser(username);
         clients.add(c);
@@ -65,43 +71,44 @@ public class ServerManager {
 
     public void printClients() {
         for (int i = 0; i < clients.size(); i++) {
-            System.out.println(i + ". " + clients.get(i).getUsername());
+            System.out.println((i + 1) + ". " + clients.get(i).getUsername());
         }
     }
 
     public void printRestaurants() {
         for (int i = 0; i < restaurants.size(); i++) {
-            System.out.println(i + ". " + restaurants.get(i).getUsername());
+            System.out.println((i + 1) + ". " + restaurants.get(i).getUsername());
         }
     }
 
     public void printDeliveryDrivers() {
         for (int i = 0; i < deliveryDrivers.size(); i++) {
-            System.out.println(i + ". " + deliveryDrivers.get(i).getUsername());
+            System.out.println((i + 1) + ". " + deliveryDrivers.get(i).getUsername());
         }
     }
 
     public void printOrders() {
+        if (orders.isEmpty()) {
+            System.out.println("No hay pedidos registrados en el servidor.");
+            return;
+        }
         for (int i = 0; i < orders.size(); i++) {
-            // TODO System.out.println(i + ". " + ); falta alguna manera de mostrar la info del pedido incluyendo el estado y los participantes
+            System.out.println((i + 1) + ". " + orders.get(i).toString());
         }
     }
 
     public void deleteClientByIndex(int index) {
-        if (index >= 0 && index < clients.size()) {
+        if (index >= 0 && index < clients.size())
             clients.remove(index);
-        }
     }
 
     public void deleteRestaurantByIndex(int index) {
-        if (index >= 0 && index < restaurants.size()) {
+        if (index >= 0 && index < restaurants.size())
             restaurants.remove(index);
-        }
     }
 
     public void deleteDeliveryDriverByIndex(int index) {
-        if (index >= 0 && index < deliveryDrivers.size()) {
+        if (index >= 0 && index < deliveryDrivers.size())
             deliveryDrivers.remove(index);
-        }
     }
 }

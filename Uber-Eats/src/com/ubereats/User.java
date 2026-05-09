@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class User {
     private static int nextId;
-    
+
     static {
         nextId = 1;
     }

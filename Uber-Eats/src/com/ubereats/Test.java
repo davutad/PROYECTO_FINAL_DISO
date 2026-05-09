@@ -28,7 +28,7 @@ public class Test {
         menuItems.add(pasta);
         menuItems.add(salad);
 
-        // Crear estrategia de pago 
+        // Crear estrategia de pago
         PaymentMethodStrategy paymentMethod = new CardPaymentStrategy("1234567812345678");
 
         // Crear pedido
@@ -53,13 +53,15 @@ public class Test {
         order.updateOrderState(); // En reparto -> Entregado
         order.updateOrderState(); // Ya entregado
 
-        /* --------------------------------------------------------------------------- */
+        /*
+         * ---------------------------------------------------------------------------
+         */
 
         Scanner sc = new Scanner(System.in);
 
         int input = -1;
         // BUCLE MENU
-        while(input != 6){
+        while (input != 6) {
             System.out.println("Select an option:");
             System.out.println(" 1. Register new user");
             System.out.println(" 2. Delete user");
@@ -70,7 +72,7 @@ public class Test {
 
             input = sc.nextInt();
 
-            switch(input){
+            switch (input) {
                 case 1:
                     resgiterUserMenu(sc);
                     break;
@@ -86,7 +88,7 @@ public class Test {
                 case 5:
                     // TODO igual que 4 pero cancelar en vez de actualizar estado
                     break;
-                
+
                 case 6:
                     System.out.println("Exiting...");
                     break;
@@ -98,7 +100,7 @@ public class Test {
     }
 
     // TODO falta rellenar el menu cuando se registra un restaurante
-    public static void resgiterUserMenu(Scanner sc){
+    public static void resgiterUserMenu(Scanner sc) {
         System.out.println("Select user type to register:");
         System.out.println(" 1. Client");
         System.out.println(" 2. Restaurant");
@@ -111,7 +113,7 @@ public class Test {
         System.out.println("Enter username:");
         String username = sc.nextLine();
 
-        switch(userType){
+        switch (userType) {
             case 1:
                 serverManager.registerClient(username);
                 break;
@@ -133,7 +135,7 @@ public class Test {
         System.out.println();
     }
 
-    public static void deleteUserMenu(Scanner sc){
+    public static void deleteUserMenu(Scanner sc) {
         System.out.println("Select user type to delete:");
         System.out.println(" 1. Client");
         System.out.println(" 2. Restaurant");
@@ -143,7 +145,7 @@ public class Test {
         int userType = sc.nextInt();
         sc.nextLine();
 
-        switch(userType){
+        switch (userType) {
             case 1:
                 System.out.println("Choose a client to delete: ");
                 serverManager.printClients();
@@ -180,11 +182,12 @@ public class Test {
         System.out.println();
     }
 
-    public static void simulateNewOrder(Scanner sc){
-        // TODO supongo que habra que poner un metodo add order en todos los users para que se añada el pedido a su lista de pedidos
+    public static void simulateNewOrder(Scanner sc) {
+        // TODO supongo que habra que poner un metodo add order en todos los users para
+        // que se añada el pedido a su lista de pedidos
         System.out.println("Choose a client: ");
         serverManager.printClients();
-        Client c =  serverManager.getClients().get(sc.nextInt() - 1);
+        Client c = serverManager.getClients().get(sc.nextInt() - 1);
         sc.nextLine();
         System.out.println("Choose a restaurant: ");
         serverManager.printRestaurants();
@@ -195,15 +198,15 @@ public class Test {
         List<MenuItem> itemsToOrder = new ArrayList<>();
     }
 
-    public static void chooseItemsToOrder(Scanner sc, Restaurant r, List<MenuItem> itemsToOrder){
-        while(true){
+    public static void chooseItemsToOrder(Scanner sc, Restaurant r, List<MenuItem> itemsToOrder) {
+        while (true) {
             System.out.println("Enter item number to add to order (0 to finish): ");
             int itemIndex = sc.nextInt() - 1;
             sc.nextLine();
-            if(itemIndex == -1){
+            if (itemIndex == -1) {
                 break;
             }
-            if(itemIndex < -1 || itemIndex >= r.getMenu().size()){
+            if (itemIndex < -1 || itemIndex >= r.getMenu().size()) {
                 System.out.println("Invalid item number.");
                 continue;
             }

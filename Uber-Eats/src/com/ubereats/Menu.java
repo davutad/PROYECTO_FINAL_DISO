@@ -1,95 +1,36 @@
 package com.ubereats;
 
+import com.ubereats.Decorator.MenuItemComponent;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 
 public class Menu {
-    Map<String, List<MenuItem>> items;
+    private List<MenuItemComponent> items;
 
     public Menu() {
-        this.items = new HashMap<>();
-    }
- 
-    // TODO si no se usa borrar este metodo
-    // public MenuItem getMenuItem(String category, String itemName) {
-    //     List<MenuItem> categoryItems = items.get(category);
-    //     if (categoryItems != null) {
-    //         for (MenuItem item : categoryItems) {
-    //             if (item.name.equals(itemName)) {
-    //                 return item;
-    //             }
-    //         }
-    //     }
-    //     System.out.println("Menu item not found: " + category + " - " + itemName);
-    //     return null;
-    // }
-
-    public MenuItem getMenuItemByIndex(String category, int index) {
-        List<MenuItem> categoryItems = items.get(category);
-        if (categoryItems != null && index >= 0 && index < categoryItems.size()) {
-            return categoryItems.get(index);
-        }
-        System.out.println("Menu item index out of bounds: " + category + " - " + index);
-        return null;
+        this.items = new ArrayList<>();
     }
 
-    public void addCategory(String category) {
-        if (!items.containsKey(category)) {
-            System.out.println("Creating new category: " + category);
-            items.put(category, new ArrayList<>());
-        } else {
-            System.out.println("Category already exists: " + category);
-        }
+    public void addMenuItem(MenuItemComponent item) {
+        items.add(item);
     }
 
-    public void addMenuItem(String category, MenuItem item) {
-        if (!items.containsKey(category)) {
-            System.out.println("Category does not exist: " + category);
-        }
+    public List<MenuItemComponent> getItems() {
+        return items;
+    }
 
-        MenuItem existingItem = getMenuItem(category, item.name);
-
-        if (existingItem != null) {
-            System.out.println("Menu item already exists: " + category + " - " + item.name);
+    public void printMenu() {
+        if (items.isEmpty()) {
+            System.out.println("El menú está vacío.");
             return;
         }
-
-        items.get(category).add(item);
-    }
-
-    public void removeCategory(String category) {
-        if (items.containsKey(category)) {
-            items.remove(category);
-        } else {
-            System.out.println("Category does not exist: " + category);
+        for (int i = 0; i < items.size(); i++) {
+            System.out.println((i + 1) + ". " + items.get(i).getName() + " - " + items.get(i).getPrice() + "$");
+            System.out.println("   " + items.get(i).getDescription());
         }
     }
 
-
-    // TODO adaptar este print menu al nuevo menu item
-    public void printMenu() {
-        ArrayList<String> categories = new ArrayList<>(items.keySet());
-        for (String category : categories) {
-            System.out.println("Category: " + category);
-            List<MenuItem> categoryItems = items.get(category);
-            for (MenuItem item : categoryItems) {
-                System.out.println("  " + item.name + " - " + item.price + "€");
-                if (item.description != null) {
-                    System.out.println("    " + item.description);
-                }
-                if (!item.extras.isEmpty()) {
-                    System.out.println("    Extras:");
-                    for (Map.Entry<String, Double> extra : item.extras.entrySet()) {
-                        System.out.println("      " + extra.getKey() + " - €" + extra.getValue());
-                    }
-                }
-            }
-        }
-    }
 }
 
+    
 
-// TODO arreglar esta clase porque tenia la idea antigua de menu item
