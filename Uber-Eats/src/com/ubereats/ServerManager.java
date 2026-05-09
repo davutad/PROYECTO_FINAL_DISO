@@ -6,6 +6,8 @@ import com.ubereats.factory.RestaurantFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// context
 public class ServerManager {
 
     private ClientFactory clientFactory = new ClientFactory();
@@ -16,6 +18,7 @@ public class ServerManager {
     private List<Restaurant> restaurants;
     private List<Client> clients;
     private List<DeliveryDriver> deliveryDrivers;
+    private List<Order> orders;
 
 
     private static ServerManager instance = new ServerManager();
@@ -28,6 +31,16 @@ public class ServerManager {
 
     public static ServerManager getInstance() {
         return instance;
+    }
+
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
+    }
+    public List<Client> getClients() {
+        return clients;
+    }
+    public List<DeliveryDriver> getDeliveryDrivers() {
+        return deliveryDrivers;
     }
 
 
@@ -51,25 +64,44 @@ public class ServerManager {
     }
 
     public void printClients() {
-        System.out.println("Registered Clients:");
-        for (Client c : clients) {
-            System.out.println("- " + c.getUsername());
+        for (int i = 0; i < clients.size(); i++) {
+            System.out.println(i + ". " + clients.get(i).getUsername());
         }
     }
 
     public void printRestaurants() {
-        System.out.println("Registered Restaurants:");
-        for (Restaurant r : restaurants) {
-            System.out.println("- " + r.getUsername());
+        for (int i = 0; i < restaurants.size(); i++) {
+            System.out.println(i + ". " + restaurants.get(i).getUsername());
         }
     }
 
     public void printDeliveryDrivers() {
-        System.out.println("Registered Delivery Drivers:");
-        for (DeliveryDriver d : deliveryDrivers) {
-            System.out.println("- " + d.getUsername());
+        for (int i = 0; i < deliveryDrivers.size(); i++) {
+            System.out.println(i + ". " + deliveryDrivers.get(i).getUsername());
         }
     }
 
+    public void printOrders() {
+        for (int i = 0; i < orders.size(); i++) {
+            // TODO System.out.println(i + ". " + ); falta alguna manera de mostrar la info del pedido incluyendo el estado y los participantes
+        }
+    }
 
+    public void deleteClientByIndex(int index) {
+        if (index >= 0 && index < clients.size()) {
+            clients.remove(index);
+        }
+    }
+
+    public void deleteRestaurantByIndex(int index) {
+        if (index >= 0 && index < restaurants.size()) {
+            restaurants.remove(index);
+        }
+    }
+
+    public void deleteDeliveryDriverByIndex(int index) {
+        if (index >= 0 && index < deliveryDrivers.size()) {
+            deliveryDrivers.remove(index);
+        }
+    }
 }

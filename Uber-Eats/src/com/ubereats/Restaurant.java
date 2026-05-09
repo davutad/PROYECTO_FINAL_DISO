@@ -13,4 +13,8 @@ public class Restaurant extends User {
         return "Restaurant: " + getUsername();
     }
 
+    public void printMenu() {
+        System.out.println("Menu for " + getUsername() + ":");
+        menu.printMenu();
+    }
 }
