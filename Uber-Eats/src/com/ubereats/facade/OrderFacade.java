@@ -15,8 +15,7 @@ public class OrderFacade {
 		this.order = order;
 	}
 
-	public void createOrder(Client client, Restaurant restaurant, List<MenuItemComponent> menuItems,
-			PaymentMethodStrategy paymentMethod) {
+	public void createOrder(Client client, Restaurant restaurant, List<MenuItemComponent> menuItems, PaymentMethodStrategy paymentMethod) {
 		order.setClient(client);
 
 		order.setRestaurant(restaurant);
@@ -30,6 +29,8 @@ public class OrderFacade {
 		order.payOrder(order.calculateTotalPrice());
 
 		order.updateOrderState();
+
+		
 	}
 
 	public void cancelOrder(Order order) {
