@@ -129,4 +129,25 @@ public class OptionsMenu {
             System.out.println("Item added: " + r.getMenu().get(itemIndex).getName());
         }
     }
+
+    public void updateOrderStateMenu(){
+        System.out.println("Choose an order to update: ");
+        serverManager.printOrders();
+        System.out.print("Enter order number: ");
+        int orderIndex = sc.nextInt() - 1;
+        sc.nextLine();
+        if(orderIndex < 0 || orderIndex >= serverManager.getOrders().size()){
+            System.out.println("Invalid order number.");
+            return;
+        }
+        Order orderToUpdate = serverManager.getOrders().get(orderIndex);
+        orderToUpdate.updateOrderState();
+        System.out.println("Order " + orderIndex + " state updated to: " + orderToUpdate.getOrderState());
+        System.out.println();
+
+    }
+
+    public void cancelOrderMenu(){
+        // TODO igual que 4 pero cancelar en vez de actualizar estado
+    }
 }

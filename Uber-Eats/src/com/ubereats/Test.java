@@ -32,10 +32,10 @@ public class Test {
                     optionsMenu.simulateNewOrder();
                     break;
                 case 4:
-                    // TODO mostrar pedidos y elegir uno para actualizar su estado
+                    optionsMenu.updateOrderStateMenu();
                     break;
                 case 5:
-                    // TODO igual que 4 pero cancelar en vez de actualizar estado
+                    optionsMenu.cancelOrderMenu();
                     break;
                 
                 case 6:
