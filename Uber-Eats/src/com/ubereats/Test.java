@@ -3,7 +3,7 @@ package com.ubereats;
 import java.util.Scanner;
 
 public class Test {
-    private static ServerManager serverManager = ServerManager.getInstance();
+    private static final ServerManager serverManager = ServerManager.getInstance();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

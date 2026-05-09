@@ -1,22 +1,17 @@
 package com.ubereats;
 
-import com.ubereats.Decorator.BasicMenuItem;
+import java.util.List;
+
+import com.ubereats.Decorator.MenuItemComponent;
 import com.ubereats.Decorator.SpecificMenuItem;
+import java.util.ArrayList;
 
 public class Restaurant extends User {
-    private Menu menu;
+    private List<MenuItemComponent> menu;
 
     public Restaurant(String username) {
         super(username);
-        this.menu = new Menu();
-        this.menu.addMenuItem(new SpecificMenuItem(
-                new BasicMenuItem("Pizza Margherita", 8.99, "Salsa de tomate, mozzarella y albahaca")));
-        this.menu.addMenuItem(new SpecificMenuItem(
-                new BasicMenuItem("Hamburguesa Clásica", 10.50, "Carne 100% vacuno, lechuga, tomate y queso")));
-    }
-
-    public Menu getMenu() {
-        return menu;
+        this.menu = new ArrayList<MenuItemComponent>();
     }
 
     @Override
@@ -24,7 +19,21 @@ public class Restaurant extends User {
         return "Restaurant: " + getUsername();
     }
 
+    public List<MenuItemComponent> getMenu() {
+        return menu;
+    }
+
+    public void addMenuItem(MenuItemComponent item) {
+        menu.add(item);
+    }
+
     public void printMenu() {
-        menu.printMenu();
+        if (menu.isEmpty()) {
+            System.out.println("El menú está vacío.");
+            return;
+        }
+        for (int i = 0; i < menu.size(); i++) {
+            System.out.println(" " + (i + 1) + ". " + menu.get(i).getName() + " - " + menu.get(i).getPrice() + "€");
+        }
     }
 }
