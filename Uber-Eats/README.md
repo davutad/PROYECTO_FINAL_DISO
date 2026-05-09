@@ -19,7 +19,7 @@ PATRONES A USAR:
 - strategy Dani: implementarlo en simulate order 80%
 - state  Dani: 100%?
 - template (no estamos seguros) rodri
-- main y contexto principal (server manager) Jose: falta implementar observers y simulate order con nuevo menu item 70%
+- main y contexto principal (server manager): falta implementar observers y simulate order con nuevo menu item 70%
 
 
 REVISAD LOS "TODO" Y SI SABEIS SOLUCIONAR ALGUNO ID RELLENANDOLO

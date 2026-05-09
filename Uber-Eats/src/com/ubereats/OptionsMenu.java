@@ -1,21 +1,17 @@
 package com.ubereats;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
+import com.ubereats.Decorator.*;
+import com.ubereats.facade.OrderFacade;
 import com.ubereats.observer.ClientObserver;
 import com.ubereats.observer.DeliveryDriverObserver;
 import com.ubereats.observer.RestaurantObserver;
 import com.ubereats.strategy.CardPaymentStrategy;
 import com.ubereats.strategy.CashPaymentStrategy;
-import com.ubereats.strategy.PaypalPaymentStrategy;
 import com.ubereats.strategy.PaymentMethodStrategy;
-//Nuevos imports
-import com.ubereats.Decorator.*;
-import com.ubereats.facade.OrderFacade;
-import com.ubereats.observer.*;
-import com.ubereats.strategy.*;
+import com.ubereats.strategy.PaypalPaymentStrategy;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 
 public class OptionsMenu {
@@ -166,9 +162,10 @@ public class OptionsMenu {
         System.out.println("Choose a delivery driver: ");
         serverManager.printDeliveryDrivers();
 
+        // TODO aqui deberiamos implementar un sistema de asignación automática de repartidores !!!!
         // Se asigna manualmente un repartidor al pedido.
-        DeliveryDriver deliveryDriver = serverManager.getDeliveryDrivers().get(sc.nextInt() - 1);
-        sc.nextLine();
+        //DeliveryDriver deliveryDriver = serverManager.getDeliveryDrivers().get(sc.nextInt() - 1);
+        //sc.nextLine();
 
         Order order = new Order();
 
