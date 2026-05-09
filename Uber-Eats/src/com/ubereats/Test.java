@@ -1,13 +1,5 @@
 package com.ubereats;
 
-import com.ubereats.facade.OrderFacade;
-import com.ubereats.observer.ClientObserver;
-import com.ubereats.observer.DeliveryDriverObserver;
-import com.ubereats.observer.RestaurantObserver;
-import com.ubereats.strategy.CardPaymentStrategy;
-import com.ubereats.strategy.PaymentMethodStrategy;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Test {
@@ -15,23 +7,29 @@ public class Test {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        OptionsMenu menu = new OptionsMenu(serverManager, sc);
+        OptionsMenu optionsMenu = new OptionsMenu(serverManager, sc);
 
         int input = -1;
         while(input != 6){
-            printoptions();
+            System.out.println("Select an option:");
+            System.out.println(" 1. Register user");
+            System.out.println(" 2. Delete user");
+            System.out.println(" 3. Simulate new order");
+            System.out.println(" 4. Update order state");
+            System.out.println(" 5. Cancel order");
+            System.out.println(" 6. Exit");
 
             input = sc.nextInt();
 
             switch(input){
                 case 1:
-                    menu.resgiterUserMenu();
+                    optionsMenu.resgiterUserMenu();
                     break;
                 case 2:
-                    menu.deleteUserMenu();
+                    optionsMenu.deleteUserMenu();
                     break;
                 case 3:
-                    menu.simulateNewOrder();
+                    optionsMenu.simulateNewOrder();
                     break;
                 case 4:
                     // TODO mostrar pedidos y elegir uno para actualizar su estado
@@ -48,15 +46,5 @@ public class Test {
             }
         }
 
-    }
-
-    private static void printoptions() {
-        System.out.println("Select an option:");
-        System.out.println(" 1. Register user");
-        System.out.println(" 2. Delete user");
-        System.out.println(" 3. Simulate new order");
-        System.out.println(" 4. Update order state");
-        System.out.println(" 5. Cancel order");
-        System.out.println(" 6. Exit");
-    }    
+    }   
 }

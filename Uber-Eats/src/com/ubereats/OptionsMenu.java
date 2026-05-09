@@ -86,6 +86,7 @@ public class OptionsMenu {
                 serverManager.deleteDeliveryDriverByIndex(driverIndex);
                 System.out.println("Delivery driver deleted.");
                 System.out.println();
+                break;
             case 4:
                 System.out.println("Operation cancelled.");
                 return;
@@ -102,16 +103,17 @@ public class OptionsMenu {
         serverManager.printClients();
         Client c =  serverManager.getClients().get(sc.nextInt() - 1);
         sc.nextLine();
+
         System.out.println("Choose a restaurant: ");
         serverManager.printRestaurants();
         Restaurant r = serverManager.getRestaurants().get(sc.nextInt() - 1);
         sc.nextLine();
-        System.out.println("Choose items to order: ");
-        r.printMenu();
+
         List<MenuItem> itemsToOrder = new ArrayList<>();
+        chooseItemsToOrder(r, itemsToOrder);
     }
 
-    public static void chooseItemsToOrder(Scanner sc, Restaurant r, List<MenuItem> itemsToOrder){
+    public void chooseItemsToOrder(Restaurant r, List<MenuItem> itemsToOrder){
         while(true){
             System.out.println("Enter item number to add to order (0 to finish): ");
             int itemIndex = sc.nextInt() - 1;
