@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.ubereats.facade.OrderFacade;
+
 public class OptionsMenu {
     private final ServerManager serverManager;
     private final Scanner sc;
@@ -13,7 +15,7 @@ public class OptionsMenu {
         this.sc = sc;
     } 
 
-     // TODO falta rellenar el menu cuando se registra un restaurante
+    // TODO falta rellenar el menu cuando se registra un restaurante
     public void resgiterUserMenu() {
         System.out.println("Select user type to register:");
         System.out.println(" 1. Client");
@@ -98,38 +100,12 @@ public class OptionsMenu {
     }
 
     public void simulateNewOrder(){
-        // TODO supongo que habra que poner un metodo add order en todos los users para que se añada el pedido a su lista de pedidos
-        System.out.println("Choose a client: ");
-        serverManager.printClients();
-        Client c =  serverManager.getClients().get(sc.nextInt() - 1);
-        sc.nextLine();
-
-        System.out.println("Choose a restaurant: ");
-        serverManager.printRestaurants();
-        Restaurant r = serverManager.getRestaurants().get(sc.nextInt() - 1);
-        sc.nextLine();
-
-        List<MenuItem> itemsToOrder = new ArrayList<>();
-        chooseItemsToOrder(r, itemsToOrder);
+        Order order = new Order();
+        OrderFacade orderFacade = new OrderFacade(order, serverManager, sc);
+        orderFacade.createOrder();
     }
 
-    public void chooseItemsToOrder(Restaurant r, List<MenuItem> itemsToOrder){
-        while(true){
-            System.out.println("Enter item number to add to order (0 to finish): ");
-            int itemIndex = sc.nextInt() - 1;
-            sc.nextLine();
-            if(itemIndex == -1){
-                break;
-            }
-            if(itemIndex < -1 || itemIndex >= r.getMenu().size()){
-                System.out.println("Invalid item number.");
-                continue;
-            }
-            itemsToOrder.add(r.getMenu().get(itemIndex));
-            System.out.println("Item added: " + r.getMenu().get(itemIndex).getName());
-        }
-    }
-
+    //
     public void updateOrderStateMenu(){
         System.out.println("Choose an order to update: ");
         serverManager.printOrders();
