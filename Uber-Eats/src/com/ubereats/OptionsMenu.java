@@ -111,6 +111,8 @@ public class OptionsMenu {
 
         List<MenuItem> itemsToOrder = new ArrayList<>();
         chooseItemsToOrder(r, itemsToOrder);
+
+        // TODO crear un algoritmo para elegir un delivery driver
     }
 
     // TODO revisar que clase menu item a usar aqui
@@ -166,3 +168,6 @@ public class OptionsMenu {
         return serverManager.getOrders().get(orderIndex);
     }
 }
+
+
+// TODO falta metodo para enseñar todos los pedidos finalizados o cancelados y otro para los pedidos en curso, ademas podriamos tener un metodo de eliminar pedidos finalizados o cancelados de la lista de pedidos del server, aunque no se si es necesario o si simplemente se quedan ahi para tener un historial de pedidos
