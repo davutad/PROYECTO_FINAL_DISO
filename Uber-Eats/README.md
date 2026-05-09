@@ -12,14 +12,17 @@ Pasos de uso:
 
 
 PATRONES A USAR:
-- factory Jose: uml y esqueleto: faltan metodos concretos y implmentacion en el main 100%?
+- factory Jose: uml y esqueleto: 100%?
 - facade rodrigamer: falta adaptarlo a los nuevos menuItemComponent 70%
 - decorator jacob david: ??% - NECESITAMOS QUE REVISEIS MENU ITEM (AHORA MISMO HAY 2 DISTINTOS, mirad como lo quereis dejar)
-- observer David y Dani: creo que solo revisarlo 90%
-- strategy Dani: creo que solo revisarlo 90%
-- state  Dani: creo que solo revisarlo 90%
+- observer David y Dani: creo que solo revisarlo y implementarlo 70%
+- strategy Dani: implementarlo en simulate order 80%
+- state  Dani: 100%?
 - template (no estamos seguros) rodri
-- main y contexto principal (server manager) Jose: 90%
+- main y contexto principal (server manager) Jose: falta implementar observers y simulate order con nuevo menu item 70%
 
 
-REVISAD LOS TODOS Y SI SABEIS SOLUCIONAR ALGUNO ID RELLENANDOLO
+REVISAD LOS "TODO" Y SI SABEIS SOLUCIONAR ALGUNO ID RELLENANDOLO
+
+!!! CREO QUE FALTA IMPLEMENTAR EL OBSERVER ENTERO
+POR EJEMPLO HACIENDO QUE LOS RESTAURANTES QUITEN LOS ORDERS YA PREPARADOS

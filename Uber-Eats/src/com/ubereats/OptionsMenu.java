@@ -112,8 +112,11 @@ public class OptionsMenu {
 
         List<MenuItem> itemsToOrder = new ArrayList<>();
         chooseItemsToOrder(r, itemsToOrder);
+
+        // TODO crear un algoritmo para elegir un delivery driver
     }
 
+    // TODO revisar que clase menu item a usar aqui
     public void chooseItemsToOrder(Restaurant r, List<MenuItem> itemsToOrder){
         while(true){
             System.out.println("Enter item number to add to order (0 to finish): ");
@@ -134,23 +137,40 @@ public class OptionsMenu {
 
     //
     public void updateOrderStateMenu(){
-        System.out.println("Choose an order to update: ");
+        Order orderToUpdate = chooseOrder();
+        if(orderToUpdate == null){
+            return;
+        }
+        orderToUpdate.updateOrderState();
+        System.out.println("Order " + orderIndex + " state updated to: " + orderToUpdate.getOrderState());
+        System.out.println();
+        // TODO falta que los users a traves del observer hagan algo respecto a estos updates
+    }
+
+    public void cancelOrderMenu(){
+        Order orderToCancel = chooseOrder();
+        if(orderToCancel == null){
+            return;
+        }
+        orderToCancel.cancelOrder();
+        System.out.println("Order " + orderIndex + " cancelled.");
+        System.out.println();
+        // TODO no se que hacer si en algun momento quitar los pedidos cancelados o finalizados de la lista de pedidos del server, o si simplemente se quedan ahi
+    }
+
+    private Order chooseOrder(){
+        System.out.println("Choose an order: ");
         serverManager.printOrders();
         System.out.print("Enter order number: ");
         int orderIndex = sc.nextInt() - 1;
         sc.nextLine();
         if(orderIndex < 0 || orderIndex >= serverManager.getOrders().size()){
             System.out.println("Invalid order number.");
-            return;
+            return null;
         }
-        Order orderToUpdate = serverManager.getOrders().get(orderIndex);
-        orderToUpdate.updateOrderState();
-        System.out.println("Order " + orderIndex + " state updated to: " + orderToUpdate.getOrderState());
-        System.out.println();
-
-    }
-
-    public void cancelOrderMenu(){
-        // TODO igual que 4 pero cancelar en vez de actualizar estado
+        return serverManager.getOrders().get(orderIndex);
     }
 }
+
+
+// TODO falta metodo para enseñar todos los pedidos finalizados o cancelados y otro para los pedidos en curso, ademas podriamos tener un metodo de eliminar pedidos finalizados o cancelados de la lista de pedidos del server, aunque no se si es necesario o si simplemente se quedan ahi para tener un historial de pedidos
