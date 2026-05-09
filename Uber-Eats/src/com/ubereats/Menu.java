@@ -12,17 +12,27 @@ public class Menu {
     public Menu() {
         this.items = new HashMap<>();
     }
+ 
+    // TODO si no se usa borrar este metodo
+    // public MenuItem getMenuItem(String category, String itemName) {
+    //     List<MenuItem> categoryItems = items.get(category);
+    //     if (categoryItems != null) {
+    //         for (MenuItem item : categoryItems) {
+    //             if (item.name.equals(itemName)) {
+    //                 return item;
+    //             }
+    //         }
+    //     }
+    //     System.out.println("Menu item not found: " + category + " - " + itemName);
+    //     return null;
+    // }
 
-    public MenuItem getMenuItem(String category, String itemName) {
+    public MenuItem getMenuItemByIndex(String category, int index) {
         List<MenuItem> categoryItems = items.get(category);
-        if (categoryItems != null) {
-            for (MenuItem item : categoryItems) {
-                if (item.name.equals(itemName)) {
-                    return item;
-                }
-            }
+        if (categoryItems != null && index >= 0 && index < categoryItems.size()) {
+            return categoryItems.get(index);
         }
-        System.out.println("Menu item not found: " + category + " - " + itemName);
+        System.out.println("Menu item index out of bounds: " + category + " - " + index);
         return null;
     }
 
@@ -58,6 +68,8 @@ public class Menu {
         }
     }
 
+
+    // TODO adaptar este print menu al nuevo menu item
     public void printMenu() {
         ArrayList<String> categories = new ArrayList<>(items.keySet());
         for (String category : categories) {

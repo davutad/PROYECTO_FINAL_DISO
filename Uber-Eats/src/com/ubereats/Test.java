@@ -97,7 +97,7 @@ public class Test {
 
     }
 
-
+    // TODO falta rellenar el menu cuando se registra un restaurante
     public static void resgiterUserMenu(Scanner sc){
         System.out.println("Select user type to register:");
         System.out.println(" 1. Client");
@@ -193,5 +193,22 @@ public class Test {
         System.out.println("Choose items to order: ");
         r.printMenu();
         List<MenuItem> itemsToOrder = new ArrayList<>();
+    }
+
+    public static void chooseItemsToOrder(Scanner sc, Restaurant r, List<MenuItem> itemsToOrder){
+        while(true){
+            System.out.println("Enter item number to add to order (0 to finish): ");
+            int itemIndex = sc.nextInt() - 1;
+            sc.nextLine();
+            if(itemIndex == -1){
+                break;
+            }
+            if(itemIndex < -1 || itemIndex >= r.getMenu().size()){
+                System.out.println("Invalid item number.");
+                continue;
+            }
+            itemsToOrder.add(r.getMenu().get(itemIndex));
+            System.out.println("Item added: " + r.getMenu().get(itemIndex).getName());
+        }
     }
 }
