@@ -20,6 +20,9 @@ Se usa para seleccionar el método de pago.
 ### Decorator
 Se usa para personalizar productos del menú.
 
+### Facade
+Se usa para registrar un pedido entrante.
+
 ## Flujo principal
 1. El cliente crea un pedido.
 2. El restaurante recibe el pedido.
