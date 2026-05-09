@@ -42,6 +42,11 @@ public class Order implements OrderObservable {
 		this.restaurant = restaurant;
 	}
 
+	//Faltaba el setter, obteniamos el repartidor pero no lo podíamos asignar a ningún pedido
+	public void setDeliveryDriver(DeliveryDriver deliveryDriver) {
+    	this.deliveryDriver = deliveryDriver;
+	}	
+
 	public DeliveryDriver getDeliveryDriver() {
 		return deliveryDriver;
 	}
@@ -60,6 +65,9 @@ public class Order implements OrderObservable {
 
 	public void setOrderState(OrderState orderState) {
 		this.orderState = orderState;
+		//Cambio en Order para no tener que estar llamando a notifyObservers en cada uno de los estados
+		//Hasta ahora, no notificaba el cambio, solo lo hacía.
+		notifyObservers();
 	}
 
 	@Override
@@ -91,7 +99,8 @@ public class Order implements OrderObservable {
 			System.out.println("No se puede cancelar un pedido ya entregado");
 			return;
 		}
-		this.orderState = new CancelledState();
+		//Lo mismo aquí, que también notifique
+		setOrderState(new CancelledState());
 	}
 
 	public void payOrder(Double amount) {
@@ -129,7 +138,12 @@ public class Order implements OrderObservable {
 				"Cliente: " + clientName + " | Restaurante: " + restName + " | Total: " +
 				String.format("%.2f", calculateTotalPrice()) + "$";
 	}
+}
 
+//Según el chati, me dice que esto ya está en OptionsMenu
+//Aparte tiene sentido, porque el Order no debería encargarse del menú interactivo, sino de representar el pedido
+
+/*
 	public void chooseItemsToOrder(Restaurant r, List<BasicMenuItem> itemsToOrder){
         while(true){
             System.out.println("Enter item number to add to order (0 to finish): ");
@@ -147,3 +161,4 @@ public class Order implements OrderObservable {
         }
     }
 }
+	*/
