@@ -1,5 +1,6 @@
 package com.ubereats;
 
+import com.ubereats.Decorator.BasicMenuItem;
 import com.ubereats.Decorator.MenuItem;
 import com.ubereats.Decorator.MenuItemComponent;
 import com.ubereats.observer.*;
@@ -129,7 +130,7 @@ public class Order implements OrderObservable {
 				String.format("%.2f", calculateTotalPrice()) + "$";
 	}
 
-	public void chooseItemsToOrder(Restaurant r, List<MenuItem> itemsToOrder){
+	public void chooseItemsToOrder(Restaurant r, List<BasicMenuItem> itemsToOrder){
         while(true){
             System.out.println("Enter item number to add to order (0 to finish): ");
             int itemIndex = sc.nextInt() - 1;
