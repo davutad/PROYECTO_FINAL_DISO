@@ -13,7 +13,7 @@ Pasos de uso:
 
 PATRONES A USAR:
 - factory Jose: uml y esqueleto: faltan metodos concretos y implmentacion en el main 100%?
-- facade rodrigamer: solo UML y estructura 70%
+- facade rodrigamer: falta adaptarlo a los nuevos menuItemComponent 70%
 - decorator jacob david: ??% - NECESITAMOS QUE REVISEIS MENU ITEM (AHORA MISMO HAY 2 DISTINTOS, mirad como lo quereis dejar)
 - observer David y Dani: creo que solo revisarlo 90%
 - strategy Dani: creo que solo revisarlo 90%
