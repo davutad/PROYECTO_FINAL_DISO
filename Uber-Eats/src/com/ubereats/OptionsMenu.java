@@ -264,7 +264,7 @@ public class OptionsMenu {
             return;
         }
         orderToUpdate.updateOrderState();
-        System.out.println("Order state updated to: " + orderToUpdate.getOrderState());
+        System.out.println("Order state updated to: ");
         System.out.println();
     }
 
