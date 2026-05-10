@@ -11,6 +11,7 @@ public class Test {
         Scanner sc = new Scanner(System.in);
         OptionsMenu optionsMenu = new OptionsMenu(serverManager, sc);
 
+
         Client carlos = serverManager.registerClient("Carlos");
         Client carmen = serverManager.registerClient("Carmen");
         Client luis = serverManager.registerClient("Luis");
@@ -21,6 +22,11 @@ public class Test {
         DeliveryDriver driver1 = serverManager.registerDeliveryDriver("William");
         DeliveryDriver driver2 = serverManager.registerDeliveryDriver("Yandel");
         DeliveryDriver driver3 = serverManager.registerDeliveryDriver("Yilber");
+
+        serverManager.registerClient("Carlos");
+ 
+        serverManager.registerDeliveryDriver("William");
+
 
         burgerKing.addMenuItem(new BasicMenuItem("Pizza Margarita", 10.00, "Tomate y mozzarella"));
         burgerKing.addMenuItem(new BasicMenuItem("Pizza Carbonara", 12.00, "Nata, bacon y champiñones"));
