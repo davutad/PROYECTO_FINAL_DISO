@@ -49,9 +49,5 @@ public class OrderFacade {
 		//Se notifica a todos los observador al crear el pedido
 		order.notifyObservers();
 	}
-
-	public void cancelOrder(Order order) {
-		order.cancelOrder();
-	}
 	
 }
