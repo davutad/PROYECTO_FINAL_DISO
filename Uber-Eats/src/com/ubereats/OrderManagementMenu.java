@@ -99,12 +99,12 @@ public class OrderManagementMenu {
             serverManager.removeFinishedOrders(order);
         }
 
-<<<<<<< HEAD
+
         System.out.println(
                 "Se han eliminado " + serverManager.getFinishedOrders().size() + " pedidos finalizados o cancelados del servidor.");
-=======
-        System.out.println("Se han eliminado " + ordersToDelete.size() + " pedidos finalizados o cancelados del servidor.");
->>>>>>> 26295b1c4f3c02322c9bc28440c6246bf327f0ad
+
+        System.out.println("Se han eliminado " + serverManager.getFinishedOrders().size() + " pedidos finalizados o cancelados del servidor.");
+
         System.out.println();
     }
 
