@@ -110,14 +110,12 @@ public class OrderManagementMenu {
             serverManager.removeOrder(order);
         }
 
-        System.out.println(
-                "Se han eliminado " + ordersToDelete.size() + " pedidos finalizados o cancelados del servidor.");
+        System.out.println("Se han eliminado " + ordersToDelete.size() + " pedidos finalizados o cancelados del servidor.");
         System.out.println();
     }
 
     private boolean isFinishedOrCancelledOrder(Order order) {
-        return order.getOrderState() instanceof DeliveredState
-                || order.getOrderState() instanceof CancelledState;
+        return order.getOrderState() instanceof DeliveredState || order.getOrderState() instanceof CancelledState;
     }
 
     private boolean isActiveOrder(Order order) {
