@@ -16,7 +16,10 @@ public class ServerManager {
     private List<Restaurant> restaurants;
     private List<Client> clients;
     private List<DeliveryDriver> deliveryDrivers;
-    private List<Order> orders;
+    
+    //Listas para guardar los pedidos activos y finalizados, asi es mejor para luego gestionarlos
+    private List<Order> activeOrders;
+    private List<Order> finishedOrders;
 
     private static ServerManager instance = new ServerManager();
 
@@ -24,7 +27,8 @@ public class ServerManager {
         restaurants = new ArrayList<>();
         clients = new ArrayList<>();
         deliveryDrivers = new ArrayList<>();
-        orders = new ArrayList<>();
+        activeOrders = new ArrayList<>();
+        finishedOrders = new ArrayList<>();       
     }
 
     public static ServerManager getInstance() {
@@ -43,16 +47,28 @@ public class ServerManager {
         return deliveryDrivers;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<Order> getActiveOrders(){
+    	return activeOrders;
+    }
+    
+    public List<Order> getFinishedOrders(){
+    	return finishedOrders;
     }
 
-    public void addOrder(Order order) {
-        orders.add(order);
+    public void addActiveOrders(Order order) {
+        activeOrders.add(order);
+    }
+    
+    public void addFinishedOrders(Order order) {
+        finishedOrders.add(order);
     }
 
-    public void removeOrder(Order order) {
-        orders.remove(order);
+    public void removeActiveOrders(Order order) {
+        activeOrders.remove(order);
+    }
+    
+    public void removeFinishedOrders(Order order) {
+        finishedOrders.remove(order);
     }
 
     public Client registerClient(String username) {
@@ -92,12 +108,12 @@ public class ServerManager {
     }
 
     public void printOrders() {
-        if (orders.isEmpty()) {
+        if (activeOrders.isEmpty()) {
             System.out.println("No hay pedidos registrados en el servidor.");
             return;
         }
-        for (int i = 0; i < orders.size(); i++) {
-            System.out.println((i + 1) + ". " + orders.get(i).toString());
+        for (int i = 0; i < activeOrders.size(); i++) {
+            System.out.println((i + 1) + ". " + activeOrders.get(i).toString());
         }
     }
 
@@ -127,5 +143,11 @@ public class ServerManager {
             }
         }
         return bestDriver;
+    }
+    
+    public void archiveOrder(Order order) {
+    	activeOrders.remove(order);
+    	finishedOrders.add(order);
+    	
     }
 }

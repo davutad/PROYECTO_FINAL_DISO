@@ -41,7 +41,7 @@ public class OrderFacade {
         restaurant.addOrder(order);
         driver.addOrder(order);
 		driver.incrementAssignedOrders();
-		ServerManager.getInstance().addOrder(order);
+		ServerManager.getInstance().addActiveOrders(order);
 
 		//Pagar
 		order.payOrder(order.calculateTotalPrice());

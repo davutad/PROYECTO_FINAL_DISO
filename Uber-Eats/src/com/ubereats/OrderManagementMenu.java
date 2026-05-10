@@ -35,7 +35,7 @@ public class OrderManagementMenu {
     }
 
     private Order chooseOrder() {
-        if (serverManager.getOrders().isEmpty()) {
+        if (serverManager.getActiveOrders().isEmpty()) {
             System.out.println("No hay pedidos registrados.\n");
             return null;
         }
@@ -46,72 +46,61 @@ public class OrderManagementMenu {
         int orderIndex = sc.nextInt() - 1;
         sc.nextLine();
 
-        if (orderIndex < 0 || orderIndex >= serverManager.getOrders().size()) {
+        if (orderIndex < 0 || orderIndex >= serverManager.getActiveOrders().size()) {
             System.out.println("Invalid order number.");
             return null;
         }
-        return serverManager.getOrders().get(orderIndex);
+        return serverManager.getActiveOrders().get(orderIndex);
     }
 
+    //Imprimimos los pedidos de la lista de pedidos activos
     public void printActiveOrdersMenu() {
+    	if(serverManager.getActiveOrders().isEmpty()) {
+    		System.out.println("No hay pedidos activos.\n");
+    		return;
+    	}
         System.out.println("=== Pedidos en curso ===");
 
-        boolean found = false;
-
-        for (Order order : serverManager.getOrders()) {
+        for (Order order : serverManager.getActiveOrders()) {
             if (isActiveOrder(order)) {
                 System.out.println(order);
-                found = true;
             }
-        }
-
-        if (!found) {
-            System.out.println("No hay pedidos en curso.");
         }
 
         System.out.println();
     }
 
+    //Ahora miramos en la lista de pedidos cancelados
     public void printFinishedOrCancelledOrdersMenu() {
-        System.out.println("=== Pedidos finalizados o cancelados ===");
-
-        boolean found = false;
-
-        for (Order order : serverManager.getOrders()) {
-            if (isFinishedOrCancelledOrder(order)) {
-                System.out.println(order);
-                found = true;
-            }
+        if(serverManager.getFinishedOrders().isEmpty()) {
+        	System.out.println("No hay pedidos finalizados o cancelados.");
+        	return;
         }
 
-        if (!found) {
-            System.out.println("No hay pedidos finalizados o cancelados.");
+        System.out.println("=== Pedidos finalizados o cancelados ===");
+
+        for (Order order : serverManager.getFinishedOrders()) {
+            if (isFinishedOrCancelledOrder(order)) {
+                System.out.println(order);
+                
+            }
         }
 
         System.out.println();
     }
 
     public void deleteFinishedOrCancelledOrdersMenu() {
-        List<Order> ordersToDelete = new ArrayList<>();
-
-        for (Order order : serverManager.getOrders()) {
-            if (isFinishedOrCancelledOrder(order)) {
-                ordersToDelete.add(order);
-            }
+        if(serverManager.getFinishedOrders().isEmpty()) {
+        	System.out.println("No hay pedidos finalizados o cancelados para eliminar.");
+        	return;
         }
 
-        if (ordersToDelete.isEmpty()) {
-            System.out.println("No hay pedidos finalizados o cancelados para eliminar.");
-            System.out.println();
-            return;
-        }
-
-        for (Order order : ordersToDelete) {
-            serverManager.removeOrder(order);
+        for (Order order : serverManager.getFinishedOrders()) {
+            serverManager.removeFinishedOrders(order);
         }
 
         System.out.println(
-                "Se han eliminado " + ordersToDelete.size() + " pedidos finalizados o cancelados del servidor.");
+                "Se han eliminado " + serverManager.getFinishedOrders().size() + " pedidos finalizados o cancelados del servidor.");
         System.out.println();
     }
 
