@@ -25,6 +25,13 @@ public class OptionsMenu {
 
         int userType = sc.nextInt();
         sc.nextLine();
+        
+        if(userType == 4) {
+        	System.out.println("Operation cancelled.");
+        	return;
+        }
+        
+        
 
         System.out.println("Enter username: ");
         String username = sc.nextLine();
@@ -45,11 +52,9 @@ public class OptionsMenu {
             case 3:
                 serverManager.registerDeliveryDriver(username);
                 break;
-            case 4:
-                System.out.println("Operation cancelled.");
-                return;
-            default:
-                System.out.println("Invalid user type.");
+                
+            default: 
+            	System.out.println("Invalid user type.");
                 return;
         }
 
