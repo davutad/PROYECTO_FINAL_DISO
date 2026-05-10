@@ -20,14 +20,17 @@ public class Test {
         burgerKing.addMenuItem(new BasicMenuItem("Ensalada César",     7.00, "Lechuga, pollo y picatostes"));
 
         int input = -1;
-        while(input != 6){
+        while(input != 9){
             System.out.println("Select an option:");
             System.out.println(" 1. Register user");
             System.out.println(" 2. Delete user");
             System.out.println(" 3. Simulate new order");
             System.out.println(" 4. Update order state");
             System.out.println(" 5. Cancel order");
-            System.out.println(" 6. Exit");
+            System.out.println(" 6. Show active orders");
+            System.out.println(" 7. Show finished/cancelled orders");
+            System.out.println(" 8. Delete finished/cancelled orders");
+            System.out.println(" 9. Exit");
 
             input = sc.nextInt();
 
@@ -48,6 +51,15 @@ public class Test {
                     optionsMenu.cancelOrderMenu();
                     break;
                 case 6:
+                    optionsMenu.printActiveOrdersMenu();
+                    break;
+                case 7:
+                    optionsMenu.printFinishedOrCancelledOrdersMenu();
+                    break;
+                case 8:
+                    optionsMenu.deleteFinishedOrCancelledOrdersMenu();
+                    break;
+                case 9:
                     System.out.println("Exiting...");
                     break;
                 default:

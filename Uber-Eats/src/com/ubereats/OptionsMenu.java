@@ -6,6 +6,8 @@ import com.ubereats.strategy.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import com.ubereats.state.CancelledState;
+import com.ubereats.state.DeliveredState;
 
 public class OptionsMenu {
     private final ServerManager serverManager;
@@ -329,9 +331,76 @@ public class OptionsMenu {
         }
     
 
-}
+    }
 
+    public void printActiveOrdersMenu() {
+        System.out.println("=== Pedidos en curso ===");
 
-// TODO falta metodo para enseñar todos los pedidos finalizados o cancelados y otro para los pedidos en curso, ademas podriamos tener un metodo de eliminar pedidos finalizados o cancelados de la lista de pedidos del server, aunque no se si es necesario o si simplemente se quedan ahi para tener un historial de pedidos
+        boolean found = false;
+
+        for (Order order : serverManager.getOrders()) {
+            if (isActiveOrder(order)) {
+                System.out.println(order);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No hay pedidos en curso.");
+        }
+
+        System.out.println();
+    }
+
+    public void printFinishedOrCancelledOrdersMenu() {
+        System.out.println("=== Pedidos finalizados o cancelados ===");
+
+        boolean found = false;
+
+        for (Order order : serverManager.getOrders()) {
+            if (isFinishedOrCancelledOrder(order)) {
+                System.out.println(order);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No hay pedidos finalizados o cancelados.");
+        }
+
+        System.out.println();
+    }
+
+    public void deleteFinishedOrCancelledOrdersMenu() {
+        List<Order> ordersToDelete = new ArrayList<>();
+
+        for (Order order : serverManager.getOrders()) {
+            if (isFinishedOrCancelledOrder(order)) {
+                ordersToDelete.add(order);
+            }
+        }
+
+        if (ordersToDelete.isEmpty()) {
+            System.out.println("No hay pedidos finalizados o cancelados para eliminar.");
+            System.out.println();
+            return;
+        }
+
+        for (Order order : ordersToDelete) {
+            serverManager.removeOrder(order);
+        }
+
+        System.out.println("Se han eliminado " + ordersToDelete.size() + " pedidos finalizados o cancelados del servidor.");
+        System.out.println();
+    }
+
+    private boolean isFinishedOrCancelledOrder(Order order) {
+        return order.getOrderState() instanceof DeliveredState
+                || order.getOrderState() instanceof CancelledState;
+    }
+
+    private boolean isActiveOrder(Order order) {
+        return !isFinishedOrCancelledOrder(order);
+    }
 
 }
