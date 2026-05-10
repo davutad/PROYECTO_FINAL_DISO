@@ -2,6 +2,7 @@ package com.ubereats.observer;
 
 import com.ubereats.DeliveryDriver;
 import com.ubereats.Order;
+import com.ubereats.ServerManager;
 import com.ubereats.state.CancelledState;
 import com.ubereats.state.DeliveredState;
 
@@ -26,6 +27,7 @@ public class DeliveryDriverObserver implements OrderObserver {
 			deliveryDriver.removeOrder(order);
 			deliveryDriver.decrementAssignedOrders(); // Cuando el pedido se termina tambien se decrementa el numero de
 														// pedidos que tiene
+			ServerManager.getInstance().removeOrder(order);
 		}
 
 	}
