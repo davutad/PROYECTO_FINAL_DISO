@@ -2,10 +2,7 @@ package com.ubereats;
 
 import com.ubereats.Decorator.*;
 import com.ubereats.facade.OrderFacade;
-import com.ubereats.strategy.CardPaymentStrategy;
-import com.ubereats.strategy.CashPaymentStrategy;
-import com.ubereats.strategy.PaymentMethodStrategy;
-import com.ubereats.strategy.PaypalPaymentStrategy;
+import com.ubereats.strategy.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
