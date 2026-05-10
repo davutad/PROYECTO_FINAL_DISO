@@ -50,9 +50,9 @@ public class ServerManager {
     public void addOrder(Order order) {
         orders.add(order);
     }
-    
+
     public void removeOrder(Order order) {
-    	orders.remove(order);
+        orders.remove(order);
     }
 
     public Client registerClient(String username) {
@@ -117,20 +117,15 @@ public class ServerManager {
     }
 
     public DeliveryDriver assignDriver() {
-        DeliveryDriver assignedDriver = null;
-        
+        if (deliveryDrivers.isEmpty())
+            return null;
+
+        DeliveryDriver bestDriver = deliveryDrivers.get(0);
         for (DeliveryDriver driver : deliveryDrivers) {
-        if (assignedDriver == null) {
-            assignedDriver = driver;
-        } else if (driver.getAssignedOrders() == 0) {
-            // Encontramos uno con 0 pedidos, es el óptimo
-            assignedDriver = driver;
-            break;
-        } else if (driver.getAssignedOrders() < assignedDriver.getAssignedOrders()) {
-            // Tiene menos pedidos que el actual candidato
-            assignedDriver = driver;
+            if (driver.getAssignedOrders() < bestDriver.getAssignedOrders()) {
+                bestDriver = driver;
+            }
         }
-    }
-        return assignedDriver;  
+        return bestDriver;
     }
 }
