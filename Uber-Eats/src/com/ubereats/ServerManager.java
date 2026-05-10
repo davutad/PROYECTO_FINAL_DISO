@@ -50,6 +50,10 @@ public class ServerManager {
     public void addOrder(Order order) {
         orders.add(order);
     }
+    
+    public void removeOrder(Order order) {
+    	orders.remove(order);
+    }
 
     public Client registerClient(String username) {
         Client c = (Client) clientFactory.registerUser(username);
