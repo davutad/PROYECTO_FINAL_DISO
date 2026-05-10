@@ -23,6 +23,7 @@ public class DeliveryDriverObserver implements OrderObserver{
 
 		if (order.getOrderState() instanceof DeliveredState || order.getOrderState() instanceof CancelledState) {
             deliveryDriver.removeOrder(order);
+            deliveryDriver.decrementAssignedOrders(); //Cuando el pedido se termina tambien se decrementa el numero de pedidos que tiene
     	}
 
 	}

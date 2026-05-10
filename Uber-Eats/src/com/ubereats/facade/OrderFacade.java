@@ -22,7 +22,6 @@ public class OrderFacade {
 
 	public void createOrder(Client client, Restaurant restaurant, List<MenuItemComponent> menuItems, PaymentMethodStrategy paymentMethod) {
 		
-		
 		order.setClient(client);
 		order.setRestaurant(restaurant);
 		order.setPaymentMethod(paymentMethod);
@@ -32,6 +31,7 @@ public class OrderFacade {
 		}
 
 		DeliveryDriver driver = ServerManager.getInstance().assignDriver();
+		driver.incrementAssignedOrders();//Se incrementa el numero de pedidos que tiene
 
 		//Añadir observadores al pedido(No se como gesstionar el observador de deliveryDriver)
 		order.addObserver(new ClientObserver(client));
