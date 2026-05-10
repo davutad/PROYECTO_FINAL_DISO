@@ -9,7 +9,7 @@ public class DeliveryDriver extends User {
         this.assignOrders = 0;
     }
     
-    public int getAssignedOrders() {
+    public Integer getAssignedOrders() {
     	return assignOrders;
     }
     
