@@ -11,9 +11,9 @@ public class Test {
         Scanner sc = new Scanner(System.in);
         OptionsMenu optionsMenu = new OptionsMenu(serverManager, sc);
 
-        Client carlos = serverManager.registerClient("Carlos");
+        serverManager.registerClient("Carlos");
         Restaurant burgerKing = serverManager.registerRestaurant("BurgerKing");
-        DeliveryDriver driver = serverManager.registerDeliveryDriver("William");
+        serverManager.registerDeliveryDriver("William");
 
         burgerKing.addMenuItem(new BasicMenuItem("Pizza Margarita", 10.00, "Tomate y mozzarella"));
         burgerKing.addMenuItem(new BasicMenuItem("Pizza Carbonara", 12.00, "Nata, bacon y champiñones"));

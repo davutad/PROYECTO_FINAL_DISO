@@ -2,8 +2,6 @@ package com.ubereats;
 
 import com.ubereats.state.CancelledState;
 import com.ubereats.state.DeliveredState;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class OrderManagementMenu {
