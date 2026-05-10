@@ -21,7 +21,9 @@ public class OrderFacade {
 	}
 
 	public void createOrder(Client client, Restaurant restaurant, List<MenuItemComponent> menuItems, PaymentMethodStrategy paymentMethod) {
+		DeliveryDriver driver = ServerManager.getInstance().assignDriver();
 		
+		order.setDeliveryDriver(driver);
 		order.setClient(client);
 		order.setRestaurant(restaurant);
 		order.setPaymentMethod(paymentMethod);
@@ -30,17 +32,20 @@ public class OrderFacade {
 			order.addMenuItem(menuItem);
 		}
 
-		DeliveryDriver driver = ServerManager.getInstance().assignDriver();
-		driver.incrementAssignedOrders();//Se incrementa el numero de pedidos que tiene
-
 		//Añadir observadores al pedido(No se como gesstionar el observador de deliveryDriver)
 		order.addObserver(new ClientObserver(client));
 		order.addObserver(new RestaurantObserver(restaurant));
 		order.addObserver(new DeliveryDriverObserver(driver));
 		
+		client.addOrder(order);
+        restaurant.addOrder(order);
+        driver.addOrder(order);
+		driver.incrementAssignedOrders();
+		ServerManager.getInstance().addOrder(order);
+
 		//Pagar
 		order.payOrder(order.calculateTotalPrice());
-		
+
 		//Se notifica a todos los observador al crear el pedido
 		order.notifyObservers();
 	}
@@ -50,28 +55,3 @@ public class OrderFacade {
 	}
 	
 }
-
-/*
- * public Order createOrder(Client client) {
- * Order order = new Order(client);
- * 
- * order.setRestaurant(restaurant);
- * 
- * for (MenuItem menuItem : menuItems) {
- * order.addMenuItem(menuItem);
- * }
- * 
- * order.setPaymentMethod(paymentMethod);
- * 
- * order.payOrder(order.calculateTotalPrice());
- * 
- * order.setOrderState(new PreparingState());
- * 
- * order.notifyObservers();
- * 
- * DeliveryDriver assignedDriver = restaurant.assignDeliveryDriver();
- * order.setDeliveryDriver(assignedDriver);
- * 
- * return order;
- * }
- */

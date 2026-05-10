@@ -144,49 +144,30 @@ public class OptionsMenu {
             return;
         }
 
-        System.out.println("Choose a delivery driver: ");
-        serverManager.printDeliveryDrivers();
-        DeliveryDriver deliveryDriver = serverManager.getDeliveryDrivers().get(sc.nextInt() - 1);
-        sc.nextLine();
-
         Order order = new Order();
+        OrderFacade orderFacade = new OrderFacade(order);
 
-        order.setClient(client);
-        order.setRestaurant(restaurant);
-        order.setDeliveryDriver(deliveryDriver);
-
-        chooseItemsToOrder(restaurant, order);
+        List<MenuItemComponent> selectedItems = chooseItemsToOrder(restaurant);
 
         PaymentMethodStrategy paymentMethod = choosePaymentMethod();
-        order.setPaymentMethod(paymentMethod);
+        
+        orderFacade.createOrder(client, restaurant, selectedItems, paymentMethod);
 
         if (!order.validate()) {
             System.out.println("No se puede crear el pedido. Faltan datos.");
             return;
         }
 
-        order.addObserver(new ClientObserver(client));
-        order.addObserver(new RestaurantObserver(restaurant));
-        order.addObserver(new DeliveryDriverObserver(deliveryDriver));
-
-        client.addOrder(order);
-        restaurant.addOrder(order);
-        deliveryDriver.addOrder(order);
-
-        serverManager.addOrder(order);
-
         System.out.println("Pedido creado correctamente:");
         System.out.println(order);
-
-        order.payOrder(order.calculateTotalPrice());
-
-        order.notifyObservers();
 
         System.out.println();
     }
 
    
-    public void chooseItemsToOrder(Restaurant restaurant, Order order) {
+    public List<MenuItemComponent> chooseItemsToOrder(Restaurant restaurant) {
+        List<MenuItemComponent> selectedItems = new ArrayList<>();
+
         restaurant.printMenu();
 
         while (true) {
@@ -207,8 +188,7 @@ public class OptionsMenu {
 
             boolean decorating = true;
             while (decorating) {
-                System.out.println("\nProducto actual: " + selectedItem.getName()
-                        + " | Precio: " + String.format("%.2f", selectedItem.getPrice()) + "€");
+                System.out.println("\nProducto actual: " + selectedItem.getName() + " | Precio: " + String.format("%.2f", selectedItem.getPrice()) + "€");
                 System.out.println("¿Desea personalizar este producto?");
                 System.out.println(" 1. Añadir extra");
                 System.out.println(" 2. Cambiar tamaño");
@@ -216,10 +196,10 @@ public class OptionsMenu {
                 System.out.println(" 4. Aplicar descuento");
                 System.out.println(" 5. Finalizar y añadir al pedido");
 
-                int decOpt = sc.nextInt();
+                int option = sc.nextInt();
                 sc.nextLine();
 
-                switch (decOpt) {
+                switch (option) {
                     case 1:
                         System.out.println("Nombre del extra:");
                         String extraName = sc.nextLine();
@@ -276,10 +256,12 @@ public class OptionsMenu {
                 }
             }
 
-            order.addMenuItem(selectedItem);
+            selectedItems.add(selectedItem);
             System.out.println("Item final añadido: " + selectedItem.getName());
             System.out.println();
         }
+
+        return selectedItems;
     }
 
     public void updateOrderStateMenu() {

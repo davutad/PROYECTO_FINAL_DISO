@@ -37,7 +37,6 @@ public class Test {
                 case 5:
                     optionsMenu.cancelOrderMenu();
                     break;
-                
                 case 6:
                     System.out.println("Exiting...");
                     break;
