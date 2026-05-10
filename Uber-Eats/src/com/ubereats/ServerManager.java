@@ -127,7 +127,6 @@ public class ServerManager {
             assignedDriver = driver;
         }
     }
-        return assignedDriver;
-        
+        return assignedDriver;  
     }
 }

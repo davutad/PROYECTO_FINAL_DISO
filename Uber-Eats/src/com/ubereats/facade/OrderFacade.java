@@ -20,41 +20,35 @@ public class OrderFacade {
 		this.order = order;
 	}
 
-	public void createOrder(Client client, Restaurant restaurant, List<MenuItemComponent> menuItems,
-			PaymentMethodStrategy paymentMethod) {
-
-		DeliveryDriver driver = ServerManager.getInstance().getDeliveryDrivers().get(0);// TODO (.assingDriver())
-																						// asignar deliveryDriver con el
-																						// "algoritmo para ordenarlos"
-																						// que va a estar dentro de
-																						// serverManager
-
+	public void createOrder(Client client, Restaurant restaurant, List<MenuItemComponent> menuItems, PaymentMethodStrategy paymentMethod) {
+		
+		
 		order.setClient(client);
 		order.setRestaurant(restaurant);
 		order.setPaymentMethod(paymentMethod);
-		order.setDeliveryDriver(driver);
-
+		
 		for (MenuItemComponent menuItem : menuItems) {
 			order.addMenuItem(menuItem);
 		}
 
-		// Añadir observadores al pedido(No se como gesstionar el observador de
-		// deliveryDriver)
+		DeliveryDriver driver = ServerManager.getInstance().assignDriver();
+
+		//Añadir observadores al pedido(No se como gesstionar el observador de deliveryDriver)
 		order.addObserver(new ClientObserver(client));
 		order.addObserver(new RestaurantObserver(restaurant));
 		order.addObserver(new DeliveryDriverObserver(driver));
-
-		// Pagar
+		
+		//Pagar
 		order.payOrder(order.calculateTotalPrice());
-
-		// Se notifica a todos los observador al crear el pedido
+		
+		//Se notifica a todos los observador al crear el pedido
 		order.notifyObservers();
 	}
 
 	public void cancelOrder(Order order) {
 		order.cancelOrder();
 	}
-
+	
 }
 
 /*
