@@ -282,11 +282,17 @@ public class OptionsMenu {
     }
 
     private Order chooseOrder() {
+    	if(serverManager.getOrders().isEmpty()) {
+    		System.out.println("No hay pedidos registrados.\n");
+    		return null;
+    	}
+    	
         System.out.println("Choose an order: ");
         serverManager.printOrders();
         System.out.print("Enter order number: ");
         int orderIndex = sc.nextInt() - 1;
         sc.nextLine();
+        
         if (orderIndex < 0 || orderIndex >= serverManager.getOrders().size()) {
             System.out.println("Invalid order number.");
             return null;
