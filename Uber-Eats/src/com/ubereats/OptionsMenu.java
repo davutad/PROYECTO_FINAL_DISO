@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class OptionsMenu {
     private final ServerManager serverManager;
     private final Scanner sc;
@@ -290,8 +289,6 @@ public class OptionsMenu {
         }
         return serverManager.getOrders().get(orderIndex);
     }
-
-
 
     private PaymentMethodStrategy choosePaymentMethod() {
         System.out.println("Choose payment method:");
