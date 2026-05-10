@@ -12,12 +12,23 @@ public class Test {
         OptionsMenu optionsMenu = new OptionsMenu(serverManager, sc);
 
         Client carlos = serverManager.registerClient("Carlos");
+        Client carmen = serverManager.registerClient("Carmen");
+        Client luis = serverManager.registerClient("Luis");
+        
+        Restaurant kiSushi = serverManager.registerRestaurant("Ki Sushi");
         Restaurant burgerKing = serverManager.registerRestaurant("BurgerKing");
-        DeliveryDriver driver = serverManager.registerDeliveryDriver("William");
+        
+        DeliveryDriver driver1 = serverManager.registerDeliveryDriver("William");
+        DeliveryDriver driver2 = serverManager.registerDeliveryDriver("Yandel");
+        DeliveryDriver driver3 = serverManager.registerDeliveryDriver("Yilber");
 
         burgerKing.addMenuItem(new BasicMenuItem("Pizza Margarita", 10.00, "Tomate y mozzarella"));
         burgerKing.addMenuItem(new BasicMenuItem("Pizza Carbonara", 12.00, "Nata, bacon y champiñones"));
         burgerKing.addMenuItem(new BasicMenuItem("Ensalada César", 7.00, "Lechuga, pollo y picatostes"));
+        
+        kiSushi.addMenuItem(new BasicMenuItem("Nigiri salmon", 10.00, "arroz con salmon"));
+        kiSushi.addMenuItem(new BasicMenuItem("Ramen Suchi", 12.00, "fideos finos con ternera"));
+        kiSushi.addMenuItem(new BasicMenuItem("Pez mantequilla", 7.00, "arroz con pex matequilla"));
 
         int input = -1;
         while (input != 9) {
