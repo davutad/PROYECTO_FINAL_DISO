@@ -2,12 +2,22 @@ package com.ubereats;
 
 import java.util.Scanner;
 
+import com.ubereats.Decorator.BasicMenuItem;
+
 public class Test {
     private static final ServerManager serverManager = ServerManager.getInstance();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         OptionsMenu optionsMenu = new OptionsMenu(serverManager, sc);
+        
+        Client carlos = serverManager.registerClient("Carlos");
+        Restaurant burgerKing = serverManager.registerRestaurant("BurgerKing");
+        DeliveryDriver driver = serverManager.registerDeliveryDriver("William");
+        
+        burgerKing.addMenuItem(new BasicMenuItem("Pizza Margarita",   10.00, "Tomate y mozzarella"));
+        burgerKing.addMenuItem(new BasicMenuItem("Pizza Carbonara",   12.00, "Nata, bacon y champiñones"));
+        burgerKing.addMenuItem(new BasicMenuItem("Ensalada César",     7.00, "Lechuga, pollo y picatostes"));
 
         int input = -1;
         while(input != 6){

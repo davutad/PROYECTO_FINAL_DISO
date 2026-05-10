@@ -89,7 +89,6 @@ public class Order implements OrderObservable {
 
 	public void updateOrderState() {
 		orderState.manageState(this);
-		this.notifyObservers();
 	}
 
 	// Metodo cancelar pedido

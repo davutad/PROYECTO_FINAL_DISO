@@ -15,9 +15,9 @@ public class DeliveryDriverObserver implements OrderObserver {
 
 	@Override
 	public void update(Order order) {
-		System.out.println("Delivery driver " + deliveryDriver.getUsername()
-				+ " el pedido #" + order.getId() + " del cliente " + order.getClient().getUsername() + " a cambiado a "
-				+ order.getOrderState());
+		System.out.println("Delivery driver: " + deliveryDriver.getUsername()
+				+ " el pedido #" + order.getId() + " del cliente " + order.getClient().getUsername() + " a cambiado a: "
+				+ order.getOrderState() + "\n");
 
 		// Aquí empezamos con los cambios de la lista de pedidos, en caso de entregado o
 		// cancelado, se saca de la lista
