@@ -2,9 +2,6 @@ package com.ubereats;
 
 import com.ubereats.Decorator.*;
 import com.ubereats.facade.OrderFacade;
-import com.ubereats.observer.ClientObserver;
-import com.ubereats.observer.DeliveryDriverObserver;
-import com.ubereats.observer.RestaurantObserver;
 import com.ubereats.strategy.CardPaymentStrategy;
 import com.ubereats.strategy.CashPaymentStrategy;
 import com.ubereats.strategy.PaymentMethodStrategy;
