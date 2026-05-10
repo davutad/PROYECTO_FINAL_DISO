@@ -12,16 +12,16 @@ public class Test {
         OptionsMenu optionsMenu = new OptionsMenu(serverManager, sc);
 
 
-        Client carlos = serverManager.registerClient("Carlos");
-        Client carmen = serverManager.registerClient("Carmen");
-        Client luis = serverManager.registerClient("Luis");
+        serverManager.registerClient("Carlos");
+        serverManager.registerClient("Carmen");
+        serverManager.registerClient("Luis");
         
         Restaurant kiSushi = serverManager.registerRestaurant("Ki Sushi");
         Restaurant burgerKing = serverManager.registerRestaurant("BurgerKing");
         
-        DeliveryDriver driver1 = serverManager.registerDeliveryDriver("William");
-        DeliveryDriver driver2 = serverManager.registerDeliveryDriver("Yandel");
-        DeliveryDriver driver3 = serverManager.registerDeliveryDriver("Yilber");
+        serverManager.registerDeliveryDriver("William");
+        serverManager.registerDeliveryDriver("Yandel");
+        serverManager.registerDeliveryDriver("Yilber");
 
         serverManager.registerClient("Carlos");
  

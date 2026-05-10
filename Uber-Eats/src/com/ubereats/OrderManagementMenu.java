@@ -91,19 +91,11 @@ public class OrderManagementMenu {
         if(serverManager.getFinishedOrders().isEmpty()) {
         	System.out.println("No hay pedidos finalizados o cancelados para eliminar.");
         	return;
+        } else{
+            serverManager.getFinishedOrders().clear();
+            System.out.println("Se han eliminado " + serverManager.getFinishedOrders().size() + " pedidos finalizados o cancelados del servidor.");
+            System.out.println();
         }
-
-        for (Order order : serverManager.getFinishedOrders()) {
-            serverManager.removeFinishedOrders(order);
-        }
-
-
-        System.out.println(
-                "Se han eliminado " + serverManager.getFinishedOrders().size() + " pedidos finalizados o cancelados del servidor.");
-
-        System.out.println("Se han eliminado " + serverManager.getFinishedOrders().size() + " pedidos finalizados o cancelados del servidor.");
-
-        System.out.println();
     }
 
     private boolean isFinishedOrCancelledOrder(Order order) {

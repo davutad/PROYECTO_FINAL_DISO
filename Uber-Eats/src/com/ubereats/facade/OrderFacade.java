@@ -8,9 +8,7 @@ import com.ubereats.Restaurant;
 import com.ubereats.DeliveryDriver;
 import com.ubereats.ServerManager;
 import com.ubereats.Decorator.MenuItemComponent;
-import com.ubereats.observer.ClientObserver;
-import com.ubereats.observer.DeliveryDriverObserver;
-import com.ubereats.observer.RestaurantObserver;
+import com.ubereats.observer.*;
 import com.ubereats.strategy.PaymentMethodStrategy;
 
 public class OrderFacade {
