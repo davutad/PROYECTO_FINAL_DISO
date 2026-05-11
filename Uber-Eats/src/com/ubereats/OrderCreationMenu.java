@@ -52,6 +52,11 @@ public class OrderCreationMenu {
 
         List<MenuItemComponent> selectedItems = chooseItemsToOrder(restaurant);
 
+        if (selectedItems.isEmpty()) {
+            System.out.println("No se han seleccionado productos para el pedido.");
+            return;
+        }
+
         PaymentMethodStrategy paymentMethod = choosePaymentMethod();
 
         orderFacade.createOrder(client, restaurant, selectedItems, paymentMethod);
@@ -92,7 +97,7 @@ public class OrderCreationMenu {
 
             while (decorating) {
                 System.out.println("\nProducto actual: " + selectedItem.getName() + " | Precio: "
-                        + String.format("%.2f", selectedItem.getPrice()) + "€");
+                        + String.format("%.2f", selectedItem.getPrice()) + "$");
                 System.out.println("¿Desea personalizar este producto?");
                 System.out.println(" 1. Añadir extra");
                 System.out.println(" 2. Cambiar tamaño");

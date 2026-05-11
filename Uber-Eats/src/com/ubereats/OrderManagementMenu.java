@@ -1,7 +1,5 @@
 package com.ubereats;
 
-import com.ubereats.state.CancelledState;
-import com.ubereats.state.DeliveredState;
 import java.util.Scanner;
 
 public class OrderManagementMenu {
@@ -91,13 +89,5 @@ public class OrderManagementMenu {
         serverManager.getFinishedOrders().clear();
         System.out.println("Se han eliminado " + count + " pedidos finalizados o cancelados del servidor.");
         System.out.println();
-    }
-
-    private boolean isFinishedOrCancelledOrder(Order order) {
-        return order.getOrderState() instanceof DeliveredState || order.getOrderState() instanceof CancelledState;
-    }
-
-    private boolean isActiveOrder(Order order) {
-        return !isFinishedOrCancelledOrder(order);
     }
 }

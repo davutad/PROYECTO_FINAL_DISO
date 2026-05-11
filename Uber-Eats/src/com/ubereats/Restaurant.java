@@ -32,7 +32,7 @@ public class Restaurant extends User {
             return;
         }
         for (int i = 0; i < menu.size(); i++) {
-            System.out.println(" " + (i + 1) + ". " + menu.get(i).getName() + " - " + menu.get(i).getPrice() + "€");
+            System.out.println(" " + (i + 1) + ". " + menu.get(i).getName() + " - " + menu.get(i).getPrice() + "$");
         }
     }
 }

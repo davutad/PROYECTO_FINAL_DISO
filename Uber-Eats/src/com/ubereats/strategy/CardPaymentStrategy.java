@@ -10,7 +10,7 @@ public class CardPaymentStrategy implements PaymentMethodStrategy{
 	@Override
 	public void pay(Double amount) {
 		String masked = "**** **** ****" + cardNumber.substring(cardNumber.length() - 4);
-		System.out.println("Pagando " + amount + "€ mediante Tarjeta de credito desde la cuenta: " 
+		System.out.println("Pagando " + amount + "$ mediante Tarjeta de credito desde la cuenta: " 
 				+ masked);
 		
 	}

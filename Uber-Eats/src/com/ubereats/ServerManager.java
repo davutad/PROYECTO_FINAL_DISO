@@ -70,7 +70,7 @@ public class ServerManager {
     public void removeFinishedOrders(Order order) {
         finishedOrders.remove(order);
     }
-
+    
     public Client registerClient(String username) {
         Client c = (Client) clientFactory.registerUser(username);
         clients.add(c);

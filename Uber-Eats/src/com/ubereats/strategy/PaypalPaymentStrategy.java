@@ -10,7 +10,7 @@ public class PaypalPaymentStrategy implements PaymentMethodStrategy{
 
 	@Override
 	public void pay(Double amount) {
-		System.out.println("Pagando " + amount + "€ mediante PayPal desde la cuenta: " + this.paypalAccount);
+		System.out.println("Pagando " + amount + "$ mediante PayPal desde la cuenta: " + this.paypalAccount);
 	}
 	
 }
