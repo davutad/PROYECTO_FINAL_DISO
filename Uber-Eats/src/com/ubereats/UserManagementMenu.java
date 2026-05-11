@@ -35,13 +35,8 @@ public class UserManagementMenu {
                 serverManager.registerClient(username);
                 break;
             case 2:
-                Restaurant r = serverManager.registerRestaurant(username);
-                // Rellenamos el menú por defecto al registrar un restaurante
-                r.addMenuItem(
-                        new BasicMenuItem("Hamburguesa Clásica", 8.50, "Hamburguesa de ternera con lechuga y tomate"));
-                r.addMenuItem(new BasicMenuItem("Pizza Margarita", 10.00, "Pizza con salsa de tomate y mozzarella"));
-                r.addMenuItem(
-                        new BasicMenuItem("Ensalada César", 7.00, "Ensalada con pollo, picatostes y salsa césar"));
+                Restaurant r = serverManager.registerRestaurant(username);                
+                addMenuItemsLoop(r);
                 break;
             case 3:
                 serverManager.registerDeliveryDriver(username);
@@ -55,7 +50,35 @@ public class UserManagementMenu {
         System.out.println("User registered: " + username);
         System.out.println();
     }
+    
+    private void addMenuItemsLoop(Restaurant r){
+        while (true) {
+            System.out.println("Do you want to add a menu item? (yes/no)");
+            String response = sc.nextLine().trim().toLowerCase();
+            
+            while (!response.equals("yes") && !response.equals("no")) {
+                System.out.println("Please enter 'yes' or 'no':");
+                response = sc.nextLine().trim().toLowerCase();
+            }
 
+            if (response.equals("no")) {
+                break;
+            }
+
+            System.out.println("Enter item name: ");
+            String itemName = sc.nextLine();
+
+            System.out.println("Enter item price: ");
+            double itemPrice = sc.nextDouble();
+            sc.nextLine(); // Consume newline
+
+            System.out.println("Enter item description: ");
+            String itemDescription = sc.nextLine();
+
+            r.addMenuItem(new BasicMenuItem(itemName, itemPrice, itemDescription));
+        }
+    }
+    
     public void deleteUserMenu() {
         System.out.println("Select user type to delete:");
         System.out.println(" 1. Client");

@@ -145,7 +145,7 @@ public class OrderCreationMenu {
                         break;
 
                     case 4:
-                        System.out.println("Porcentaje de descuento, por ejemplo 0.15 para 15%:");
+                        System.out.println("Porcentaje de descuento, por ejemplo 0,15 para 15%:");
                         double percentage = sc.nextDouble();
                         sc.nextLine();
                         selectedItem = new DiscountDecorator(selectedItem, percentage);

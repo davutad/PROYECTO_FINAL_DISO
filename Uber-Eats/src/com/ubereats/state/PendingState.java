@@ -6,7 +6,6 @@ public class PendingState implements OrderState{
 
 	@Override
 	public void manageState(Order order) {
-		// TODO Auto-generated method stu
 		System.out.println("Pedido pendiente de confirmacion");
 		order.setOrderState(new PreparingState());
 		

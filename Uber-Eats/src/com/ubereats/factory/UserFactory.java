@@ -9,7 +9,6 @@ public abstract class UserFactory {
             throw new IllegalArgumentException("Invalid username");
         }
         User u = createUser(username);
-        // TODO no se si al final hay que añadir observers a los users
         return u;
     }
 

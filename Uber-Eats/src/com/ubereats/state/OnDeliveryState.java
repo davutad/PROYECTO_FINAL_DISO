@@ -6,7 +6,6 @@ public class OnDeliveryState implements OrderState{
 
 	@Override
 	public void manageState(Order order) {
-		// TODO Auto-generated method stub
 		System.out.println("El repartidor esta en camino");
 		order.setOrderState(new DeliveredState());
 		

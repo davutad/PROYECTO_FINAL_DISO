@@ -11,7 +11,7 @@ public class Test {
         Scanner sc = new Scanner(System.in);
         OptionsMenu optionsMenu = new OptionsMenu(serverManager, sc);
 
-
+        //Harcodeado para no tener que hacerlo todo el rato
         serverManager.registerClient("Carlos");
         serverManager.registerClient("Carmen");
         serverManager.registerClient("Luis");
