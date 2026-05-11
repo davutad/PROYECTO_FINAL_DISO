@@ -11,7 +11,6 @@ public class ClientObserver implements OrderObserver{
 		this.client = client;
 	}
 	
-	//Metodo que notifica al cliente de que su pedido ha cambiado de estado
 	@Override
 	public void update(Order order) {
 		System.out.println("\nClient: " + client.getName() + " tu pedido # " + order.getId() + " ha cambiado a " 

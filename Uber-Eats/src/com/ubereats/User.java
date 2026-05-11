@@ -22,7 +22,7 @@ public abstract class User {
         this.orders = new ArrayList<>();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -33,19 +33,6 @@ public abstract class User {
     public void setUsername(String username) {
         this.username = username;
     }
-
-    /*
-    Implementación de orders que no los usábamos hasta ahora para que el Observer no solo imprima los mensajes
-    sino que pueda modificar la lista de pedidos de cada usuario y así tenga una funcionalidad lógica, no solo
-    hacer Sysos y ya
-
-    El ejemplo que me ha dado es el siguiente:
-
-    El cliente guarda sus pedidos.
-    El restaurante guarda los pedidos que tiene que preparar.
-    El repartidor guarda los pedidos que tiene asignados.
-    Cuando se cancela o entrega un pedido, se podría eliminar de la lista activa.
-    */
 
     public List<Order> getOrders() {
         return orders;

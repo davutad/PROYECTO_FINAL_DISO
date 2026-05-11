@@ -22,7 +22,6 @@ public class DeliveryDriverObserver implements OrderObserver {
 
 		// Aquí empezamos con los cambios de la lista de pedidos, en caso de entregado o
 		// cancelado, se saca de la lista
-
 		
 		if (order.getOrderState() instanceof DeliveredState || order.getOrderState() instanceof CancelledState) {
 			deliveryDriver.removeOrder(order);

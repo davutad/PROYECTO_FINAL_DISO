@@ -148,6 +148,5 @@ public class ServerManager {
     public void archiveOrder(Order order) {
     	activeOrders.remove(order);
     	finishedOrders.add(order);
-    	
     }
 }

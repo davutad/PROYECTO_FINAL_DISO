@@ -6,15 +6,12 @@ import com.ubereats.state.OnDeliveryState;
 import com.ubereats.state.CancelledState;
 
 public class RestaurantObserver implements OrderObserver {
-	// Restaurante al que pertenece el observador
 	private Restaurant restaurant;
 
-	// Constructor
 	public RestaurantObserver(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
 
-	// Metodo para decir al restaurante de que ha cambiado el estado del pedido
 	@Override
 	public void update(Order order) {
 		System.out.println("Restaurante: " + restaurant.getUsername() + " el pedido #" + order.getId()

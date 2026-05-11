@@ -3,7 +3,6 @@ package com.ubereats.state;
 import com.ubereats.Order;
 
 public class PendingState implements OrderState{
-
 	@Override
 	public void manageState(Order order) {
 		System.out.println("Pedido pendiente de confirmacion");
@@ -15,5 +14,4 @@ public class PendingState implements OrderState{
 	public String toString() {
 		return "Pendiente";
 	}
-
 }
