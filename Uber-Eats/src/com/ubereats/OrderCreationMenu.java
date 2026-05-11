@@ -169,7 +169,6 @@ public class OrderCreationMenu {
     }
 
     private PaymentMethodStrategy choosePaymentMethod() {
-        PaymentMethodStrategy paymentMethod = null;
         System.out.println("Choose payment method:");
         System.out.println(" 1. Cash");
         System.out.println(" 2. Card");
@@ -178,31 +177,18 @@ public class OrderCreationMenu {
         int option = sc.nextInt();
         sc.nextLine();
 
-        while(paymentMethod == null) {
-            switch (option) {
-                case 1:
-                    paymentMethod = new CashPaymentStrategy();
-                    break;
-
-                case 2:
-                    System.out.println("Enter card number:");
-                    String cardNumber = sc.nextLine();
-                    paymentMethod = new CardPaymentStrategy(cardNumber);
-                    break;
-
-                case 3:
-                  System.out.println("Enter PayPal account:");
-                    String paypalAccount = sc.nextLine();
-                    paymentMethod = new PaypalPaymentStrategy(paypalAccount);
-                    break;
-
-                default:
-                    System.out.println("Invalid option. Please choose again:");
-                    option = sc.nextInt();
-                    sc.nextLine();
-            }
+        switch (option) {
+            case 1:
+                return new CashPaymentStrategy();
+            case 2:
+                System.out.println("Enter card number:");
+                return new CardPaymentStrategy(sc.nextLine());
+            case 3:
+                System.out.println("Enter PayPal account:");
+                return new PaypalPaymentStrategy(sc.nextLine());
+            default:
+                System.out.println("Opción inválida. Se selecciona efectivo por defecto.");
+                return new CashPaymentStrategy();
         }
-
-        return paymentMethod;
     }
 }
