@@ -16,8 +16,8 @@ public class Test {
         serverManager.registerClient("Carmen");
         serverManager.registerClient("Luis");
         
-        Restaurant casaErnesto = serverManager.registerRestaurant("Ki Sushi");
-        Restaurant burgerKing = serverManager.registerRestaurant("Casa Ernesto");
+        Restaurant casaErnesto = serverManager.registerRestaurant("Casa Ernesto");
+        Restaurant burgerKing = serverManager.registerRestaurant("Burger King");
         
         serverManager.registerDeliveryDriver("William");
         serverManager.registerDeliveryDriver("Yandel");
