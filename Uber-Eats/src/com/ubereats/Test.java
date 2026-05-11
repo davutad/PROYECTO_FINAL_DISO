@@ -23,10 +23,6 @@ public class Test {
         serverManager.registerDeliveryDriver("Yandel");
         serverManager.registerDeliveryDriver("Yilber");
 
-        serverManager.registerClient("Carlos");
- 
-        serverManager.registerDeliveryDriver("William");
-
 
         burgerKing.addMenuItem(new BasicMenuItem("Pizza Margarita", 10.00, "Tomate y mozzarella"));
         burgerKing.addMenuItem(new BasicMenuItem("Pizza Carbonara", 12.00, "Nata, bacon y champiñones"));
