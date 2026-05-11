@@ -16,21 +16,21 @@ public class Test {
         serverManager.registerClient("Carmen");
         serverManager.registerClient("Luis");
         
-        Restaurant kiSushi = serverManager.registerRestaurant("Ki Sushi");
-        Restaurant burgerKing = serverManager.registerRestaurant("BurgerKing");
+        Restaurant casaErnesto = serverManager.registerRestaurant("Ki Sushi");
+        Restaurant burgerKing = serverManager.registerRestaurant("Casa Ernesto");
         
         serverManager.registerDeliveryDriver("William");
         serverManager.registerDeliveryDriver("Yandel");
         serverManager.registerDeliveryDriver("Yilber");
 
 
-        burgerKing.addMenuItem(new BasicMenuItem("Pizza Margarita", 10.00, "Tomate y mozzarella"));
-        burgerKing.addMenuItem(new BasicMenuItem("Pizza Carbonara", 12.00, "Nata, bacon y champiñones"));
-        burgerKing.addMenuItem(new BasicMenuItem("Ensalada César", 7.00, "Lechuga, pollo y picatostes"));
+        burgerKing.addMenuItem(new BasicMenuItem("CheeseBurger", 4.5, "Hambuguesa con queso y tomate"));
+        burgerKing.addMenuItem(new BasicMenuItem("Nuggets", 3.00, "nuggets de pollo"));
+        burgerKing.addMenuItem(new BasicMenuItem("Crispy Chicken", 5.99, "Hamburguesa de polla con tomate y lechuga"));
         
-        kiSushi.addMenuItem(new BasicMenuItem("Nigiri salmon", 10.00, "arroz con salmon"));
-        kiSushi.addMenuItem(new BasicMenuItem("Ramen Suchi", 12.00, "fideos finos con ternera"));
-        kiSushi.addMenuItem(new BasicMenuItem("Pez mantequilla", 7.00, "arroz con pex matequilla"));
+        casaErnesto.addMenuItem(new BasicMenuItem("Pasta Al Pesto", 10.00, "Pasta con pesto"));
+        casaErnesto.addMenuItem(new BasicMenuItem("Pizza Margarita", 12.00, "pizza con tomate y  queso mozzarella"));
+        casaErnesto.addMenuItem(new BasicMenuItem("Pizza Carbonara", 13.00, "Pizza con queso, bacon"));
 
         int input = -1;
         while (input != 9) {
